@@ -1,18 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+	
+<head >
+   <style>
+	body, html {
+		height: 100%;
+    	background-size: cover;
+    	background-repeat:no-repeat;
+    	background: linear-gradient( to bottom ,rgb(238,249,249), rgb(97,241,241,1));
+	}
+	.container {
+    	height: 100%;
+    	display: flex;
+    	justify-content: center;
+    	align-items: center;
+	}
+	#logo {
+    	text-align: center;
+    	color:#078686
+	}
+	.button {
+		color:#0E9494
+	}
+	</style>
+
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <link rel="stylesheet" href="css/bootstrap.min.css">
-
-
-<body>
-	<h1>Goal track</h1>
-	<a href="login.html"><button>Log in</button></a>
+<body>	
+	<div class="logo">
+		<h1 id="logo">Goal track</h1>
+	</div>
+	<div class="container">
+		<button class="button" type="button" ><a href="login.html">Log in</a></button>
+	</div>
 </body>
 
 </html>
+
 
 

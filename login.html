@@ -4,6 +4,14 @@
 
 
 <body>
+    <style>
+      body, html {
+        height: 100%;
+        background-size: cover;
+        background-repeat:no-repeat;
+        background: linear-gradient( to bottom ,rgb(238,249,249), rgb(97,241,241,1));
+      }
+    </style>        
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
 
@@ -33,7 +41,6 @@ var ui = new firebaseui.auth.AuthUI(firebase.auth());
 </script>
 <!-- The surrounding HTML is left untouched by FirebaseUI.
      Your app may use that space for branding, controls and other customizations.-->
-     <h1>Welcome to My Awesome App</h1>
      <div id="firebaseui-auth-container"></div>
      <div id="loader">Loading...</div>
 
