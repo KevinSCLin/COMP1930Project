@@ -16,11 +16,31 @@
     	align-items: center;
 	}
 	#logo {
-    	text-align: center;
-    	color:#078686
+    	position: absolute;
+		left: 40%;
+		top: 25%;
+
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 50px;
+		line-height: 59px;
+		display: flex;
+		align-items: center;
+		text-align: center;
+		letter-spacing: -0.333333px;
+
+		color: #078686;
 	}
-	.button {
-		color:#0E9494
+	#Login {
+		position: absolute;
+		width: 147px;
+		height: 49px;
+		left: 44%;
+		top: 40%;
+
+		background: #8FD2D2;
+		border-radius: 10px;
 	}
 	</style>
 
@@ -30,11 +50,11 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <link rel="stylesheet" href="css/bootstrap.min.css">
 <body>	
-	<div class="logo">
+	<div class="container">
 		<h1 id="logo">Goal track</h1>
 	</div>
 	<div class="container">
-		<button class="button" type="button" ><a href="login.html">Log in</a></button>
+			<a href="login.html"><button id="Login">Log in</button></a>
 	</div>
 </body>
 
