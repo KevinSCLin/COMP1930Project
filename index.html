@@ -3,45 +3,7 @@
 	
 <head >
    <style>
-	body, html {
-		height: 100%;
-    	background-size: cover;
-    	background-repeat:no-repeat;
-    	background: linear-gradient( to bottom ,rgb(238,249,249), rgb(97,241,241,1));
-	}
-	.container {
-    	height: 100%;
-    	display: flex;
-    	justify-content: center;
-    	align-items: center;
-	}
-	#logo {
-    	position: absolute;
-		left: 40%;
-		top: 25%;
-
-		font-family: Roboto;
-		font-style: normal;
-		font-weight: normal;
-		font-size: 50px;
-		line-height: 59px;
-		display: flex;
-		align-items: center;
-		text-align: center;
-		letter-spacing: -0.333333px;
-
-		color: #078686;
-	}
-	#Login {
-		position: absolute;
-		width: 147px;
-		height: 49px;
-		left: 44%;
-		top: 40%;
-
-		background: #8FD2D2;
-		border-radius: 10px;
-	}
+	
 	</style>
 
   <meta charset="UTF-8">
@@ -49,12 +11,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/indexstyle.css">
 <body>	
-	<div class="container">
-		<h1 id="logo">Goal track</h1>
+	<div class="container" id="logo">
+		<h1 id="logoText">Goal track</h1>
 	</div>
-	<div class="container">
-			<a href="login.html"><button id="Login">Log in</button></a>
+	<div class="container" id="login"></div>
+			<a href="login.html"><button id="loginButton">Log in</button></a>
 	</div>
 </body>
 

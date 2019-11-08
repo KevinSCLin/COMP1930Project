@@ -1,8 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    
-</head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+<style>
+  .container {
+    	height: 100%;
+    	display: flex;
+    	justify-content: center;
+    	align-items: center;
+	}
 
-
+ </style> 
+<div class="container" id="login">
 <body>
     <style>
       body, html {
@@ -38,6 +51,7 @@
 <script>
 // Initialize the FirebaseUI Widget using Firebase.
 var ui = new firebaseui.auth.AuthUI(firebase.auth());
+
 </script>
 <!-- The surrounding HTML is left untouched by FirebaseUI.
      Your app may use that space for branding, controls and other customizations.-->
@@ -101,3 +115,4 @@ if (user != null) {
 }
 </script>
 </body>
+</div>
