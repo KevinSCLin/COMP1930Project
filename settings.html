@@ -6,27 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <link rel="stylesheet" href="css/bootstrap.min.css">
-  <style>
-    body, html {
-      height: 100%;
-      background-size: cover;
-      background-repeat:no-repeat;
-      background: linear-gradient( to bottom ,rgb(238,249,249), rgb(97,241,241,1));
-    }
-    #text {
-    text-align: center;
-    color:#078686
-    }
-   
-   </style>
+  <link rel="stylesheet" href="css/settingsstyle.css">
+  
 </head>
 <body>
-    <nav class="nav nav-tabs flex-column flex-sm-row">
-        <a class="nav-item nav-link active" href="main.html">Home</a>
-        <a class="nav-item nav-link" href="journals.html">Journals</a>
-        <a class="nav-item nav-link" href="goals.html">Goals</a>
-        <a class="nav-item nav-link" href="settings.html">Settings</a>
-    </nav>     
-    <h1 id="text">Settings Page</h1>
-    <a  href="index.html"></a><button type="button" class="btn btn-info"></a>Log out</button>
+  <nav class=navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar style="background-color: #63E2E2; height:7.12%">
+    <a class="nav-item nav-link active" id="home" href="main.html">Home</a>
+    <a class="nav-item nav-link" id=journals href="journals.html">Journals</a>
+    <a class="nav-item nav-link" id="goals" href="goals.html">Goals</a>
+    <a class="nav-item nav-link" id="settings" href="settings.html">Settings</a>
+</nav> 
+    <h1 id="text">Settings</h1>
+    <div class="container">
+      <a  href="index.html"><button id="logoutbutton">Log out</button></a>
+    </div>
 </body>
