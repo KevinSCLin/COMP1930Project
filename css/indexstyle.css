@@ -1,0 +1,49 @@
+body, html {
+		height: 100%;
+    	background-size: cover;
+    	background-repeat:no-repeat;
+    	background: linear-gradient(180deg, rgba(238, 249, 249, 0.99) 24.77%, rgba(215, 247, 247, 0.993002) 32.81%,
+		 #A2F3F3 51.56%, #61F1F1 74.48%);
+	}
+	.container {
+    	height: 100%;
+    	display: flex;
+    	justify-content: center;
+    	align-items: center;
+	}
+	.container#logo {
+    	position: fixed;
+		left: 15%;
+		top: 25%;
+		height: 15.3%;
+        width: 75%;   
+    }
+    #logoText {
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 4.16em;
+		line-height: 59px;
+		display: flex;
+		align-items: center;
+		text-align: center;
+		letter-spacing: -0.333333px;
+
+		color: #078686;
+	}
+	#loginButton {
+		position: fixed;
+		width: 39.4%;
+		height: 6.0%;
+		left: 31%;
+		top: 46.9%;
+        
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 20px;
+        color: #FFFFFF;
+
+		background: #8FD2D2;
+		border-radius: 10px;
+	}
