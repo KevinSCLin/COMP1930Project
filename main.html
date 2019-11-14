@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="css/mainstyle.css">
   <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
-  <script src="scripts/app.js"> </script>
+  <script src="scripts/app.js"> var db=firebase.firestore();</script>
   
   
 <head>
@@ -24,12 +24,12 @@
     </nav> 
       
     <div class="container"><h1 id="text">Goals at a Glance</h1></div>
-    <h1>Let's read from the database: <span id="goals">....</span></h1>
+    <div class="container" id="goal1"></div>
     <script>
     
-      db.collection("Users").doc("vkubliy")
+      db.collection("Users").doc("vkubliy@my.bcit.ca")
         .onSnapshot(function(c){
-          document.getElementById("data").innerHTML = c.data().message;
+          document.getElementById("goal1").innerHTML = c.data().goalName;
       });
     </script>
     
