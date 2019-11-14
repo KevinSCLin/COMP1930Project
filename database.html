@@ -1,18 +1,19 @@
 <html>
-<head>
+    <head>
 
-</head>
-<body>
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+    </head>
+    <body>
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
+<!-- The core Firebase JS SDK is always required and must be listed first  -->
+  <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+
+  <!-- //TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries --> 
      <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
-
+  
 <script>
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
+// Your web app's Firebase configuration
+    var firebaseConfig = {
     apiKey: "AIzaSyBcFkBVi6ocla_IMQbYFlCDTfnkW3pfPWQ",
     authDomain: "goal-track-89828.firebaseapp.com",
     databaseURL: "https://goal-track-89828.firebaseio.com",
@@ -20,35 +21,33 @@
     storageBucket: "goal-track-89828.appspot.com",
     messagingSenderId: "517108760638",
     appId: "1:517108760638:web:e01a74553ecb5432d8516f"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-
-  var db = firebase.firestore();
-
-  console.log("Attempting to add DB record");
-   //Enter DB information (RACHEL)
-  db.collection("students").doc("Rachel").set({
-                age: 19,
-                hair: "brown",
-                present: true
-              })
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    var db = firebase.firestore();
+    db.collection("Users").doc("vkubliy").set({
+        name: "Vlad",
+        message: "Hello",
+        class: "COMP1510"
+    })
     .then(function(){
         console.log("Added record");
     })
-    .catch(function(error) {
+        .catch(function(error) {
         console.log("Something went wrong");
-    });
 
-    function writeUserData(userId, name, email, imageUrl) {
-        firebase.database().ref('users/' + userId).set({
-        username: name,
-        email: email,
-        profile_picture : imageUrl
     });
-}
-
     
-</script>
+    </script>
 
+    <h1>Let's read from the database: <span id="data">....</span></h1>
+    <script>
+    
+      db.collection("Users").doc("vkubliy")
+        .onSnapshot(function(c){
+          document.getElementById("data").innerHTML = c.data().message;
+      });
+
+    </script>
 </body>
+</html>
