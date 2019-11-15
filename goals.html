@@ -6,31 +6,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/goals.css">
+  <script src="scripts/loginverification.js"></script>
   <style>
-    body, html {
-      height: 100%;
-      background-size: cover;
-      background-repeat:no-repeat;
-      background: linear-gradient( to bottom ,rgb(238,249,249), rgb(97,241,241,1));
-    }
-    #text, .form-control-label, #options {
-    text-align: left;
-    color:#078686
-    }
+    
     
    </style>
 </head>
 <body>
-    <nav class="nav nav-tabs flex-column flex-sm-row">
-        <a class="nav-item nav-link active" href="main.html">Home</a>
-        <a class="nav-item nav-link" href="journals.html">Journals</a>
-        <a class="nav-item nav-link" href="goals.html">Goals</a>
-        <a class="nav-item nav-link" href="settings.html">Settings</a>
-    </nav> 
+  <nav class=navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar style="background-color: #63E2E2; height:7.12%">
+    <a class="nav-item nav-link active" id="home" href="main.html">Home</a>
+    <a class="nav-item nav-link" id=journals href="journals.html">Journals</a>
+    <a class="nav-item nav-link" id="goals" href="goals.html">Goals</a>
+    <a class="nav-item nav-link" id="settings" href="settings.html">Settings</a>
+  </nav>  
     <h2 id="text">Add goals</h2>
     <form>
-
-        <fieldset class="form-group">
+    <fieldset class="form-group">
     <div class="form-group">
             <label class="form-control-label" for="goalname">Goal Name</label>
             <input class="form-control" type="text" id="goalname" placeholder="Your Goal">
@@ -56,8 +48,8 @@
             </select>
     </div>
     
-    <button type="button" class="btn btn-info">Save</button>
-    <button type="button" class="btn btn-info">Cancel</button>
+    <button type="button" type="submit">Save</button>
+    <button type="button"> Cancel </button>
 
 
 </body>

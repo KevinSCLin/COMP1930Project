@@ -7,6 +7,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/settingsstyle.css">
+  <script src="scripts/loginverification.js"></script>
   
 
   
@@ -17,11 +18,19 @@
         <a class="nav-item nav-link" id=journals href="journals.html">Journals</a>
         <a class="nav-item nav-link" id="goals" href="goals.html">Goals</a>
         <a class="nav-item nav-link" id="settings" href="settings.html">Settings</a>
+        <script src="scripts/loginverification.js"></script>
     </nav> 
     <h1 id="text">Settings</h1>
     <div class="container">
-      <a  href="index.html"><button id="logoutbutton">Log out</button></a>
+      <button id="logoutbutton">Log out</button>
     </div>
+    <script> 
+    document.getElementById("logoutbutton").onclick=redirect
+    function redirect(){
+        localStorage.clear()
+        window.location.href="index.html"
+    }
+    </script>
 
 </body>
   
