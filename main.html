@@ -11,9 +11,7 @@
   <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
   <script src="scripts/app.js"> var db=firebase.firestore();</script>
   <script src="scripts/loginverification.js"></script>
-  
-  
-  
+
 <head>
 
 </head>
@@ -26,15 +24,26 @@
     </nav> 
       
     <div class="container"><h1 id="text">Goals at a Glance</h1></div>
-    <div class="container" id="goal1"></div>
+    <div class="container" id="goalBoxes"></div>
+
     <script>
-      
-      db.collection("Users").doc("vkubliy@my.bcit.ca")
-        .onSnapshot(function(c){
-          document.getElementById("goal1").innerHTML = c.data().goalName;
-      });
-     
+
+      let index = 1;
+      db.collection("Users").doc(user).collection("Goals").get().then(function (querySnapshot) {
+        querySnapshot.forEach(function(doc){
+          var para = document.createElement("p");
+          console.log(para)
+          document.getElementById("goalBoxes").appendChild(para);
+          var node = document.createTextNode(doc.data().name);
+          console.log(node);
+          para.appendChild(node);
+          index++;
+        })
+      })
+    
+    
     </script>
+    
     
     
 </body>

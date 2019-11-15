@@ -19,14 +19,14 @@ src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"
     firebase.initializeApp(firebaseConfig);
     var db = firebase.firestore();
 
-    db.collection("Users").doc("vkubliy").set({
-        name: "Vlad",
-        message:"Hello",
+    // db.collection("Users").doc("vkubliy").set({
+    //     name: "Vlad",
+    //     message:"Hello",
         
-    })
-    .then(function(){
-        console.log("Added record");
-    })
-        .catch(function(error) {
-        console.log("Something went wrong");
-    });
+    // })
+    // .then(function(){
+    //     console.log("Added record");
+    // })
+    //     .catch(function(error) {
+    //     console.log("Something went wrong");
+    // }, {merge: true});
