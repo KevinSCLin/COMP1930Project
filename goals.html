@@ -61,8 +61,9 @@
       let goalDoc = db.collection("Users").doc(user).collection("Goals");
       let submitButton = document.getElementById("submitGoal").onclick = function () {
         goalDoc.add({
-          name: goalName.value
+          name: document.getElementById("goalname").value
         })
+        document.getElementById("goalname").value = "";
       };
 
 
