@@ -24,16 +24,16 @@
     </nav> 
       
     <div class="container"><h1 id="text">Goals at a Glance</h1></div>
-    <div class="container" id="goalBoxes"></div>
+    
 
     <script>
 
-      let index = 1;
+      
       db.collection("Users").doc(user).collection("Goals").get().then(function (querySnapshot) {
-        querySnapshot.forEach(function(doc){
-          var para = document.createElement("p");
-          console.log(para)
-          document.getElementById("goalBoxes").appendChild(para);
+        querySnapshot.forEach(goal => function(doc){
+          var div = document.createElement("div");
+          div.id= db.collection("Users").doc(userName).collection(goal)
+          document.appendChild(para);
           var node = document.createTextNode(doc.data().name);
           console.log(node);
           para.appendChild(node);
