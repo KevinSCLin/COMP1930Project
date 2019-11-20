@@ -45,7 +45,7 @@
       <option value="low">Low</option>
       </select>
     </div> -->
-    <input type="submit">
+    <input type="submit" id="submitGoal">
     
     <script>
       document.getElementById("goalform").addEventListener('submit',processForm);
@@ -57,9 +57,20 @@
           name: goalName
         })
       }
-    
+      // Kevin's code below
+      let goalDoc = db.collection("Users").doc(user).collection("Goals");
+      let submitButton = document.getElementById("submitGoal").onclick = function () {
+        goalDoc.add({
+          name: document.getElementById("goalname").value
+        })
+        document.getElementById("goalname").value = "";
+      };
+
+
     </script>
     <!-- <button type="button"> Cancel </button> -->
+
+
 
 
 </body>
