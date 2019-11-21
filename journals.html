@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="css/journalsstyle.css">
-  <script src="scripts/loginverification.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/journalsstyle.css">
+    <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+    <script src="scripts/app.js"> var db=firebase.firestore();</script>
+    <script src="scripts/loginverification.js"></script>
 
 </head>
 <body>
@@ -18,4 +21,52 @@
         <a class="nav-item nav-link" id="settings" href="settings.html">Settings</a>
     </nav> 
     <h2 id="text">Journals</h2>
+    <h3 id="instruction">Please select a goal to edit its attached journal</h3>
+    <br><br><br><br><br>
+    <div id="buttonPlacement"></div>
+
+    <script>
+      let documentID = [];
+      let goalName = [];
+      let journalDoc = db.collection("Users").doc(user).collection("Goals");
+      journalDoc.get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+          documentID.push(doc.id);
+          goalName.push(doc.data()["name"]);
+          console.log(doc.id, " => ", doc.data());   //doc.id is the document name
+          
+          generateAllButtons()  // Generate all buttons
+        });
+      });
+
+      function createGoalButtonForJournal(docID, goalName) {
+          let goalButton = document.createElement("button");
+          goalButton.style.backgroundColor = "#8FD2D2";
+          goalButton.style.fontSize = "18px";
+          goalButton.style.borderRadius = "10px";
+          goalButton.style.width = "90%";
+          goalButton.style.height = "50px";
+          goalButton.style.margin = "5px";
+          goalButton.style.top = "20%";
+          goalButton.innerHTML = goalName;
+          goalButton.onclick = function() {  // click to add docID to query string and go to add_journals URL
+              window.location.href = "add_journals.html?" + docID;
+          }
+          this.buildButton = function() {
+              document.getElementById("buttonPlacement").appendChild(goalButton);
+          }
+      }
+      console.log(documentID);
+      console.log(goalName);
+      
+      function generateAllButtons() {
+          // Generate buttons with goals inside. Click will go to add journals page 
+          for (let i=0;i<documentID.length;i++) {
+              let currentButton = new createGoalButtonForJournal(documentID[i], goalName[i]);
+              currentButton.buildButton();
+        }
+      }
+
+    </script>
+    
 </body>
