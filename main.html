@@ -16,42 +16,43 @@
 
 </head>
 <body>
-    <nav class=navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar style="background-color: #63E2E2; height:7.12%">
-        <a class="nav-item nav-link active" id="home" href="main.html">Home</a>
-        <a class="nav-item nav-link" id=journals href="journals.html">Journals</a>
-        <a class="nav-item nav-link" id="goals" href="goals.html">Goals</a>
-        <a class="nav-item nav-link" id="settings" href="settings.html">Settings</a>
-    </nav> 
+  <nav class=navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar style="background-color: #63E2E2; height:7.12%">
+    <a class="nav-item nav-link active" id="home" href="main.html">Home</a>
+    <a class="nav-item nav-link" id=journals href="journals.html">Journals</a>
+    <a class="nav-item nav-link" id="goals" href="goals.html">Goals</a>
+    <a class="nav-item nav-link" id="settings" href="settings.html">Settings</a>
+  </nav> 
       
-    <div class="container"><h1 id="text">Goals at a Glance</h1></div>
+  <div class="container"><h1 id="text">Goals at a Glance</h1></div>
     
 
-    <script>
-
-      let index = 0;
-      db.collection("Users").doc(user).collection("Goals").get().then(function (querySnapshot) {
-        querySnapshot.forEach(function(doc){
-          // create div tag for each goal doc in data base
-          var div = document.createElement("div");
-          div.className = "Goals";
-          div.id = "goal" + index;
-          //create stylesheet for each div tag
-          var styleSheet = document.createElement("style")
-          styleSheet.innerHTML="#goal" + index + "{top: " + (22.8 + 15 * index) + "%;}"
-          document.head.appendChild(styleSheet);
-          index++;
-          //create a text node based on the name saved in database
-          var para = document.createElement("p");
-          var node = document.createTextNode(doc.data().name);
-          //append created elements to html page
-          para.appendChild(node);
-          div.appendChild(para);
-          document.body.appendChild(div);
-        })
+<script>
+  let index = 0;
+  db.collection("Users").doc(user).collection("Goals").get().then(function (querySnapshot) {
+    querySnapshot.forEach(function(doc){
+      // create div tag for each goal doc in data base
+      var div = document.createElement("div");
+      div.className = "Goals";
+      div.id = "goal" + index;
+      //create an anchor tag for each
+      let anchor = document.createElement("a")
+      anchor.href = "goalsummarypage.html"
+      anchor.appendChild(div)
+      //create stylesheet for each div tag
+      var styleSheet = document.createElement("style")
+      styleSheet.innerHTML="#goal" + index + "{top: " + (22.8 + 15 * index) + "%;}"
+      document.head.appendChild(styleSheet);
+      index++;
+      //create a text node based on the name saved in database
+      var para = document.createElement("p");
+      var node = document.createTextNode(doc.data().name);
+      //append created elements to html page
+      para.appendChild(node);
+      div.appendChild(para);
+      document.body.appendChild(anchor);
       })
-    
-    
-    </script>
+  })
+</script>
     
     
     
