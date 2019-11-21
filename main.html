@@ -28,16 +28,25 @@
 
     <script>
 
-      
+      let index = 0;
       db.collection("Users").doc(user).collection("Goals").get().then(function (querySnapshot) {
-        querySnapshot.forEach(goal => function(doc){
+        querySnapshot.forEach(function(doc){
+          // create div tag for each goal doc in data base
           var div = document.createElement("div");
-          div.id= db.collection("Users").doc(userName).collection(goal)
-          document.appendChild(para);
-          var node = document.createTextNode(doc.data().name);
-          console.log(node);
-          para.appendChild(node);
+          div.className = "Goals";
+          div.id = "goal" + index;
+          //create stylesheet for each div tag
+          var styleSheet = document.createElement("style")
+          styleSheet.innerHTML="#goal" + index + "{top: " + (22.8 + 15 * index) + "%;}"
+          document.head.appendChild(styleSheet);
           index++;
+          //create a text node based on the name saved in database
+          var para = document.createElement("p");
+          var node = document.createTextNode(doc.data().name);
+          //append created elements to html page
+          para.appendChild(node);
+          div.appendChild(para);
+          document.body.appendChild(div);
         })
       })
     

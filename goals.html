@@ -49,25 +49,28 @@
     <input type="submit" id="submitGoal">
     
     <script>
+      //set up writing to database by clicking submit
+      let index=localStorage.getItem("index"); //index of goal #
       document.getElementById("goalform").addEventListener('submit',processForm);
       function processForm(e){
         e.preventDefault()
-      // Kevin's code below
-        let goalDoc = db.collection("Users").doc(user).collection("Goals");
-        let submitButton = document.getElementById("submitGoal").onclick = function () {
-          goalDoc.add({
-            name: document.getElementById("goalname").value,
-            deadline: document.getElementById("date").value,
+        //take input from input fields and store in firestore
+        db.collection("Users").doc(user).collection("Goals").doc("Goal" + index).set({
+            name: document.getElementById("goalname").value, // goal name
+            deadline: document.getElementById("date").value, 
             priority: document.getElementById("priority").value
           })
           .then(function () {
+            //increase index for next goal and set it in local memory
+            index++;
+            localStorage.setItem("index", index)
             console.log("Successfully added data ");
           })
           .catch(function(error) {
             console.log("error")
           });
       };
-    }
+    
 
     </script>
     <!-- <button type="button"> Cancel </button> -->
