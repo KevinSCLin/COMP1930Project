@@ -28,6 +28,21 @@
     <button id="submitJournal">Save</button>
 
     <script>
+        // get goal docID
+        let queryString = decodeURIComponent(window.location.search);
+        let URLsplitArr = queryString.split("?");
+        let docID = URLsplitArr[1];
+        console.log(URLsplitArr[1])
+        let goalName;
+
+        let goalDoc = db.collection("Users").doc(user).collection("Goals").doc(docID);
+        goalDoc.get().then(function(doc) {
+            console.log(doc.data());
+            goalName = doc.data()["name"];
+            console.log(goalName);
+            document.getElementById("text").innerHTML = goalName;
+        });
+        
         let saveButton = document.getElementById("submitJournal");
         saveButton.onclick = function() {
             let journal = document.getElementById("journalValue").value;
