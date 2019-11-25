@@ -1,0 +1,28 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Journal Saved Successfully</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/goals.css">
+    <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/loginverification.js"></script>
+</head>
+<body>
+    <nav class=navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar style="background-color: #63E2E2; height:7.12%">
+    <a class="nav-item nav-link active" id="home" href="main.html">Home</a>
+    <a class="nav-item nav-link" id=journals href="journals.html">Journals</a>
+    <a class="nav-item nav-link" id="goals" href="goals.html">Goals</a>
+    <a class="nav-item nav-link" id="settings" href="settings.html">Settings</a>
+    <h1 id="saveSuccess">Journal Saved Successfully!</h1>
+
+    <script>
+        setTimeout(function() {
+            window.location.href="journals.html";
+        }, 3000)
+    </script>
+</body>
+</html>
