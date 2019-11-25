@@ -12,7 +12,7 @@ body, html {
 		left: 0px;
 		top: 9.5%;
 
-		font-family: Roboto;
+		font-family: Arial, Helvetica, sans-serif;
 		font-style: normal;
 		font-weight: normal;
 		font-size: 25px;
@@ -102,3 +102,19 @@ body, html {
 	
 		color: #000000;
 	} 
+	#instruction {
+		color: #078686;
+		position: fixed;
+		left: 0px;
+		top: 17%;
+		font-family: Arial, Helvetica, sans-serif;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 20px;
+		line-height: 29px;
+		align-items: center;
+		text-align: left;
+		letter-spacing: -0.333333px;
+
+    	color: #078686;
+	}

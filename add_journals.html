@@ -18,12 +18,12 @@
             <a class="nav-item nav-link" id="goals" href="goals.html">Goals</a>
             <a class="nav-item nav-link" id="settings" href="settings.html">Settings</a>
     </nav>
-    <h2 id="text">Add Journals</h2>
+    <h2 id="text"></h2>
     
     <br><br><br>
     <div class="form-group">
         <label for="journalBox">Please enter your journal for this goal below:</label>
-        <textarea class="form-control" id="journalValue" rows="6"></textarea>
+        <textarea class="form-control" id="journalValue" rows="12"></textarea>
     </div>
     <button id="submitJournal">Save</button>
 
@@ -32,21 +32,35 @@
         let queryString = decodeURIComponent(window.location.search);
         let URLsplitArr = queryString.split("?");
         let docID = URLsplitArr[1];
-        console.log(URLsplitArr[1])
-        let goalName;
+        let journal = document.getElementById("journalValue");
 
         let goalDoc = db.collection("Users").doc(user).collection("Goals").doc(docID);
+        let journalDoc = goalDoc.collection("Journals").doc("entry1");
         goalDoc.get().then(function(doc) {
             console.log(doc.data());
-            goalName = doc.data()["name"];
+            let goalName = doc.data()["name"];
             console.log(goalName);
             document.getElementById("text").innerHTML = goalName;
+
         });
-        
+        journalDoc.get().then(function(doc) {
+            journal.innerHTML = doc.data().journalText;
+        });
+        // Save button function
         let saveButton = document.getElementById("submitJournal");
         saveButton.onclick = function() {
             let journal = document.getElementById("journalValue").value;
-            console.log(journal);
+            let journalDoc = goalDoc.collection("Journals").doc("entry1").set({
+            journalText: journal
+            })
+            .then(function() {
+                console.log("Journal entry successfully saved!");
+                window.location.href="journalsuccessfullyadded.html"
+            })
+            .catch(function(error) {
+                console.error("Error saving journal entry: ", error);
+            })
+
         }
     </script>
 </body>
