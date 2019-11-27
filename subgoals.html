@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/goals.css">
+    <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/loginverification.js"></script>
+</head>
+
+<body>
+    <nav class=navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar
+        style="background-color: #63E2E2; height:7.12%">
+        <a class="nav-item nav-link active" id="home" href="main.html">Home</a>
+        <a class="nav-item nav-link" id=journals href="journals.html">Journals</a>
+        <a class="nav-item nav-link" id="goals" href="goals.html">Goals</a>
+        <a class="nav-item nav-link" id="settings" href="settings.html">Settings</a>
+    </nav>
+
+    <h2 id="text">Add Subgoals</h2>
+
+    <form id="goalform">
+    <fieldset class="form-group">
+
+    <div class="form-group">
+        <label class="form-control-label" for="goalname">Subgoal #1</label>
+        <input class="form-control" type="text" id="goalname" placeholder="Your Subgoal">
+    </div>
+    <div class="form-group">
+        <label class="form-control-label" for="goalname">Subgoal #2</label>
+        <input class="form-control" type="text" id="goalname" placeholder="Your Subgoal">
+    </div>
+
+    <div class="form-group">
+        <label class="form-control-label" for="goalname">Subgoal #3</label>
+        <input class="form-control" type="text" id="goalname" placeholder="Your Subgoal">
+    </div>
+    <div class="form-group">
+        <label class="form-control-label" for="goalname">Subgoal #4</label>
+        <input class="form-control" type="text" id="goalname" placeholder="Your Subgoal">
+    </div>
+    <div class="form-group">
+        <label class="form-control-label" for="goalname">Subgoal #5</label>
+        <input class="form-control" type="text" id="goalname" placeholder="Your Subgoal">
+    </div>
+
+    <input type="submit" id="submitGoal">
+
+    <script>
+        //set up writing to database by clicking submit
+        let index = localStorage.getItem("Index"); //index of subgoal #
+        document.getElementById("goalform").addEventListener('submit', processForm);
+        function processForm(e) {
+            e.preventDefault()
+            //take input from input fields and store in firestore
+            db.collection("Users").doc(user).collection("Goals").doc("Goal" + index).collection("Subgoals").doc("Subgoal" + index).set({
+                name: document.getElementById("goalname").value // subgoal name
+            })
+                .then(function () {
+                    //increase index for next goal and set it in local memory
+                    index++;
+                    localStorage.setItem("index", index)
+                    console.log("Successfully added data ");
+                    window.location.href = "subgoalsuccessfullyadded.html"
+                })
+                .catch(function (error) {
+                    console.log("error")
+                });
+        };
+
+
+    </script>
+
+
+
+
+</body>
