@@ -53,13 +53,16 @@
     <input type="submit" id="submitGoal">
 
     <script>
+        localStorage.setItem('newGoal', 'Goals' + index);
+
+
         //set up writing to database by clicking submit
         let index = localStorage.getItem("Index"); //index of subgoal #
         document.getElementById("goalform").addEventListener('submit', processForm);
         function processForm(e) {
             e.preventDefault()
             //take input from input fields and store in firestore
-            db.collection("Users").doc(user).collection("Goals").doc("Goal" + index).collection("Subgoals").doc("Subgoal" + index).set({
+            db.collection("Users").doc(user).collection("Goals").doc(localStorage.getItem('newGoal')).collection("Subgoals").doc("Subgoal" + index).set({
                 name: document.getElementById("goalname").value // subgoal name
             })
                 .then(function () {
