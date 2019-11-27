@@ -62,6 +62,7 @@
         
         //set up writing to database by clicking submit
         let index = localStorage.getItem("Index"); //index of subgoal #
+
         document.getElementById("goalform").addEventListener('submit', processForm);
         function processForm(e) {
             e.preventDefault()
@@ -73,19 +74,19 @@
                 completed: false
             });
             subgoalCollection.doc("Subgoal" + 2).set({
-                name: document.getElementById("goalname1").value,
+                name: document.getElementById("goalname2").value,
                 completed: false
             });
             subgoalCollection.doc("Subgoal" + 3).set({
-                name: document.getElementById("goalname1").value,
+                name: document.getElementById("goalname3").value,
                 completed: false
             });
             subgoalCollection.doc("Subgoal" + 4).set({
-                name: document.getElementById("goalname1").value,
+                name: document.getElementById("goalname4").value,
                 completed: false
             });
             subgoalCollection.doc("Subgoal" + 5).set({
-                name: document.getElementById("goalname1").value,
+                name: document.getElementById("goalname5").value,
                 completed: false
             })
                 .then(function () {

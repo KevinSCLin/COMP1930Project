@@ -25,6 +25,7 @@
     <h3 id="instruction">Please tap a goal to add or edit your journal</h3>
     <br><br><br><br><br>
     <div id="buttonPlacement"></div>
+    <button id="pastJournals">Past Journals</button>
 
     <script>
       let documentID = [];
@@ -35,9 +36,8 @@
           documentID.push(doc.id);
           goalName.push(doc.data()["name"]);
           //console.log(doc.id, " => ", doc.data());   //doc.id is the document name
-          
-          generateAllButtons()  // Generate all buttons
         });
+        generateAllButtons()  // Generate all buttons
       });
 
       function createGoalButtonForJournal(docID, goalName) {
@@ -61,6 +61,7 @@
       function generateAllButtons() {
           // Generate buttons with goals inside. Click will go to add journals page 
           for (let i=0;i<documentID.length;i++) {
+              console.log(documentID.length + " is documentID count");
               let currentButton = new createGoalButtonForJournal(documentID[i], goalName[i]);
               currentButton.buildButton();
         }
@@ -73,12 +74,15 @@
       let savedJournal = db.collection("Users").doc(user).collection("Goals").doc("Goalnull").collection("Journals").doc("entry1");
           savedJournal.get().then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
-              journalDoc.push(doc.data().journalText);
+              journalArr.push(doc.data().journalText);
               console.log(doc.data().journalText);
             })
           })
       }
-      console.log(documentID);
+
+      document.getElementById("pastJournals").onclick = function () {
+        window.location.href = "pastjournals.html";
+      }
     </script>
     
 </body>
