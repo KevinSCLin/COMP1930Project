@@ -1,0 +1,65 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title id="goalName"></title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/pastjournalsstyle.css">
+    <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+    <script src="scripts/app.js"> var db=firebase.firestore();</script>
+    <script src="scripts/loginverification.js"></script>
+</head>
+<body>
+    <nav class=navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar style="background-color: #63E2E2; height:7.12%">
+            <a class="nav-item nav-link active" id="home" href="main.html">Home</a>
+            <a class="nav-item nav-link" id=journals href="journals.html">Journals</a>
+            <a class="nav-item nav-link" id="goals" href="goals.html">Goals</a>
+            <a class="nav-item nav-link" id="settings" href="settings.html">Settings</a>
+    <h1 id="title">Past Journals</h1>
+    <div id="JournalPlacement"></div>
+    <h2 id="goalNameh2"></h2>
+
+<script>
+    let queryString = decodeURIComponent(window.location.search);
+    let URLsplitArr = queryString.split("?");
+    let goalDoc = URLsplitArr[1];
+    let goalName = URLsplitArr[2];
+    document.getElementById("title").innerHTML = goalName;
+    let goalDocPath = db.collection("Users").doc(user).collection("Goals").doc(goalDoc).collection("Journals");
+    let journalArr = [];
+    let dateArr = [];
+
+    //Retrieving all exising journals
+    goalDocPath.orderBy("date", "desc")
+    .get()
+    .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            console.log(doc.id, " => ", doc.data());
+            journalArr.push(doc.data()["journalText"])
+            dateArr.push(doc.data()["date"]);
+        });
+        for (i=0;i<journalArr.length;i++) {
+            let newJournal = new createJournalParagraphs(new Date(dateArr[i]), journalArr[i]);
+            newJournal.createParagraph();
+        }
+    })
+    .catch(function(error) {
+        console.log("Error getting saved journals: ", error);
+    })
+
+    //Append journals to page
+    function createJournalParagraphs(date, text) {
+        let newParagraph = document.createElement("p");
+        newParagraph.style.backgroundColor = "cyan";
+        newParagraph.innerHTML = date + "<br>" + text;
+        this.createParagraph = function () {
+            document.getElementById("JournalPlacement").appendChild(newParagraph);
+        };
+    };
+</script>
+
+
+</body>
+</html>

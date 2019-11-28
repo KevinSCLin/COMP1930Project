@@ -18,62 +18,66 @@
             <a class="nav-item nav-link" id="goals" href="goals.html">Goals</a>
             <a class="nav-item nav-link" id="settings" href="settings.html">Settings</a>
     <h1 id="title">Past Journals</h1>
-    <h2 id="instruction">All Saved Journals are listed here from latest to oldest</h2>
+    <h2 id="instruction">Click on a goal to view all saved journals of the clicked goal</h2>
     <div id="JournalPlacement"></div>
 
 <script>
-    let documentID = [];
-    let goalName = [];
-    let idGoalNameJournal = [];
-    let goalArr = [];
-    let nameArr = [];
-    let dateArr = [];
-    let goalCollection = db.collection("Users").doc(user).collection("Goals");
-    goalCollection.get().then(function(querySnapshot) {
-      querySnapshot.forEach(function(doc) {   //for each element in querySnapshot, execute the anonymous function
-        documentID.push(doc.id);
-        goalName.push(doc.data()["name"]);
+
+let documentID = [];
+      let goalName = [];
+      let journalDoc = db.collection("Users").doc(user).collection("Goals");
+      journalDoc.get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {   //for each element in querySnapshot, execute the anonymous function
+          documentID.push(doc.id);
+          goalName.push(doc.data()["name"]);
+          //console.log(doc.id, " => ", doc.data());   //doc.id is the document name
+        });
+        generateAllButtons()  // Generate all buttons
       });
-      // Combine documentID and goalName into a subarray, then use this to find saved journals
-        for (i=0;i<documentID.length;i++) {
-            idGoalNameJournal.push([documentID[i], goalName[i]])
-    }
-        for (i=0;i<idGoalNameJournal.length;i++) {
-            //console.log("isGoalNameJournal is " + idGoalNameJournal[0][0] + " " + idGoalNameJournal[0][1]);
-            console.log("i is " + i);
-            let tempVal1 = idGoalNameJournal[i][0];
-            let tempVal2 = idGoalNameJournal[i][1];
-            console.log(tempVal1 + " " + tempVal2);
-            let journalDoc = goalCollection.doc(tempVal1).collection("Journals").doc("entry1").get().then(function(doc) {
-                if (doc.exists) {
-                    goalArr.push(tempVal2);
-                    nameArr.push(doc.data()["journalText"]);
-                    dateArr.push(doc.data()["date"]);
-                    let currentJournal = new createGoalButtonForJournal(tempVal2, doc.data()["journalText"], doc.data()["date"]);
-                    currentJournal.buildJournal();
-                }
-            })
-        }
-    });
-    function createGoalButtonForJournal(goalName, journalText, time) {
-          let journalButton = document.createElement("p");
-          journalButton.setAttribute("class", "journalParagraph");
-          journalButton.innerHTML = goalName + "<br>" + new Date(time) + "<br>" + journalText;
-          this.buildJournal = function() {
-              document.getElementById("JournalPlacement").appendChild(journalButton);
+
+      function createGoalButtonForJournal(docID, goalName) {
+          let goalButton = document.createElement("button");
+          goalButton.setAttribute("class", "goalButton");
+          goalButton.style.backgroundColor = "#8FD2D2";
+          goalButton.style.fontSize = "18px";
+          goalButton.style.borderRadius = "10px";
+          goalButton.style.width = "90%";
+          goalButton.style.height = "50px";
+          goalButton.style.margin = "5px";
+          goalButton.style.top = "20%";
+          goalButton.innerHTML = goalName;
+          goalButton.onclick = function() {  // click to add docID to query string and go to add_journals URL
+              window.location.href = "pastjournals_view.html?" + docID + "?" + goalName;
+          }
+          this.buildButton = function() {
+              document.getElementById("JournalPlacement").appendChild(goalButton);
           }
       }
       
-      function generateAllJournals() {
+      function generateAllButtons() {
           // Generate buttons with goals inside. Click will go to add journals page 
-          for (let i=0;i<dateArr.length;i++) {
-              let currentJournal = new createGoalButtonForJournal(goalArr[i], nameArr[i], dateArr[i]);
-              currentJournal.buildJournal();
+          for (let i=0;i<documentID.length;i++) {
+              console.log(documentID.length + " is documentID count");
+              let currentButton = new createGoalButtonForJournal(documentID[i], goalName[i]);
+              currentButton.buildButton();
         }
       }
+
+      // Retrieve past journals and generate blocks of them using js
+      let journalArr = [];
+      // Loop through all goal documents to find all journals
+      for (i=0;i<documentID.length;i++) {
+      let savedJournal = db.collection("Users").doc(user).collection("Goals").doc("Goalnull").collection("Journals").doc("entry1");
+          savedJournal.get().then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+              journalArr.push(doc.data().journalText);
+              console.log(doc.data().journalText);
+            })
+          })
+      }
+
+
 </script>
-
-
 
     
 </body>
