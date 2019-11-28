@@ -43,10 +43,11 @@
       <option value="medium">Medium</option>
       <option value="low">Low</option>
       </select>
+      <input type="submit" id="submitGoal">
     </div>
     </fieldset>
     </form>
-    <input type="submit" id="submitGoal">
+
     
     <script>
       //Kevin's codes
@@ -61,17 +62,19 @@
         });
       });
       //Kevin's codes end here, mostly
-
+      let index = existingGoals.length + 1; //index of current goal number
+      console.log(index)
       document.getElementById("goalform").addEventListener('submit',processForm);
       function processForm(e){
-        e.preventDefault()
-        let index = existingGoals.length + 1; //index of current goal number
+        e.preventDefault();
         //take input from input fields and store in firestore
         localStorage.setItem('newGoal', 'Goal' + index);
         goalDoc.doc("Goal" + index).set({
             name: document.getElementById("goalname").value, // goal name
-            deadline: document.getElementById("date").value,
-            priority: document.getElementById("priority").value
+            deadline: document.getElementById("deadline").value,
+            priority: document.getElementById("priority").value,
+            subgoals: 0,
+            completedSubgoals: 0,
           })
           .then(function () {
             //increase index for next goal and set it in local memory

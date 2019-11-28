@@ -28,31 +28,51 @@
     var query = decodeURI(window.location.search);
     var queries = query.split("?");
     var goalID = queries[1];
-    console.log(goalID);
-    let index = 1;
+    let index=0;
+    let subgoalTotal=0;
+    let subgoalsCompleted = 0;
     db.collection("Users").doc(user).collection("Goals").doc(goalID).collection("Subgoals").get().
-    then(function (querySnapshot) {
-        querySnapshot.forEach(function(doc){
-            // create div tag for each goal doc in data base
-            console.log(doc.name);
-            var inputEl = document.createElement("input");
-            inputEl.className = "subgoals";
-            InputEl.id = "subgoal" + index;
-            inputEl.type = "checkbox";
-            //create stylesheet for each div tag
-            var styleSheet = document.createElement("style")
-            styleSheet.innerHTML="#subgoal" + index + "{top: " + (22.8 + 15 * index) + "%;}"
-            document.head.appendChild(styleSheet);
-            index++;
-            //create a text node based on the name saved in database
-            var para = document.createElement("p");
-            var node = document.createTextNode(doc.data().name);
-            //append created elements to html page
-            para.appendChild(node);
-            inputEl.appendChild(para);
-            document.body.appendChild(anchor);
-        })
-    })
+    then( function (querySnapshot){
+        querySnapshot.forEach(function(doc) {
+            if (doc.data().name !== "") {
+                subgoalTotal++;
+                let div = document.createElement("div");
+                let styleSheet = document.createElement("styleSheet");
+                styleSheet.innerHTML = "#" + doc.id + "{top:" + (22.8 + 15 * index) + ";}";
+                div.id = doc.id;
+                div.innerHTML = doc.data().name;
+                div.class = "subgoals";
+                let inputEl = document.createElement("input");
+                inputEl.id = doc.id + "checkbox";
+                inputEl.type = "checkbox";
+                if (doc.data().completed === true) {
+                    inputEl.checked=true;
+                }
+                div.appendChild(inputEl);
+                document.body.appendChild(div);
+                document.head.appendChild(styleSheet);
+                index++;
+                inputEl.onclick = function () {
+                    db.collection("Users").doc(user).collection("Goals").doc(goalID).collection("Subgoals").doc(doc.id).update({
+                        completed: true,
+                    })
+                        .then(function () {
+                            subgoalsCompleted++;
+                            db.collection("Users").doc(user).collection("Goals").doc(goalID).update({
+                                subgoals: subgoalTotal,
+                                completedSubgoals: subgoalsCompleted,
+                            })
+                            console.log("true")
+                        })
+                }
+            }
+                })
+
+            })
+
+
+
+
 </script>
 </body>
 </html>

@@ -66,8 +66,11 @@
         document.getElementById("goalform").addEventListener('submit', processForm);
         function processForm(e) {
             e.preventDefault()
+
             //take input from input fields and store in firestore
-            let subgoalCollection = db.collection("Users").doc(user).collection("Goals").doc(localStorage.getItem('newGoal')).collection("Subgoals");
+
+            let subgoalCollection = db.collection("Users").doc(user).collection("Goals").doc(localStorage.getItem('newGoal')).
+            collection("Subgoals");
             
             subgoalCollection.doc("Subgoal" + 1).set({
                 name: document.getElementById("goalname1").value,
@@ -94,12 +97,14 @@
                     index++;
                     localStorage.setItem("index", index)
                     console.log("Successfully added data ");
-                    window.location.href = "subgoalsuccessfullyadded.html"
+                    // window.location.href = "subgoalsuccessfullyadded.html"
                 })
                 .catch(function (error) {
                     console.log("error")
                 });
+
         };
+
 
 
     </script>
