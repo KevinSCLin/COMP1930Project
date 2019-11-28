@@ -57,17 +57,18 @@
       goalDoc.get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {   //for each element in querySnapshot, execute the anonymous function
           existingGoals.push(doc.id); //getting doc id of each goal
-          console.log(existingGoals);
+          
           console.log(doc.id);
         });
+        console.log("existing goals count is: " + existingGoals.length);
       });
-      //Kevin's codes end here, mostly
-      let index = existingGoals.length + 1; //index of current goal number
-      console.log(index)
+
       document.getElementById("goalform").addEventListener('submit',processForm);
       function processForm(e){
         e.preventDefault();
         //take input from input fields and store in firestore
+        let index = existingGoals.length + 1; //index of current goal number
+        console.log(index, " is index count");
         localStorage.setItem('newGoal', 'Goal' + index);
         goalDoc.doc("Goal" + index).set({
             name: document.getElementById("goalname").value, // goal name
