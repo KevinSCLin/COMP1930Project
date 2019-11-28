@@ -62,6 +62,8 @@
         
         //set up writing to database by clicking submit
         let index = localStorage.getItem("Index"); //index of subgoal #
+        console.log("index count is: " + index);
+        console.log("newGoal is: " + localStorage.getItem('newGoal'));
 
         document.getElementById("goalform").addEventListener('submit', processForm);
         function processForm(e) {
@@ -97,7 +99,7 @@
                     index++;
                     localStorage.setItem("index", index)
                     console.log("Successfully added data ");
-                    // window.location.href = "subgoalsuccessfullyadded.html"
+                    window.location.href = "subgoalsuccessfullyadded.html"
                 })
                 .catch(function (error) {
                     console.log("error")
