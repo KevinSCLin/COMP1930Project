@@ -138,3 +138,8 @@ body, html {
 		border: 2px solid black;
 		left: 5px;
 	}
+
+	#JournalPlacement{
+		position: fixed;
+		top: 25%;
+	}

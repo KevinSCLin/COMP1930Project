@@ -24,8 +24,9 @@
     <div id="pastJournals"></div>
     <h3 id="instruction">Please tap a goal to add or edit your journal</h3>
     <br><br><br><br><br>
-    <div id="buttonPlacement"></div>
     <button id="pastJournals" onclick="gotoPastJounrals()">Past Journals</button>
+    <div id="buttonPlacement"></div>
+    
 
     <script>
       let documentID = [];
@@ -51,7 +52,7 @@
           goalButton.style.top = "20%";
           goalButton.innerHTML = goalName;
           goalButton.onclick = function() {  // click to add docID to query string and go to add_journals URL
-              window.location.href = "add_journals.html?" + docID;
+              window.location.href = "add_journals.html?" + docID + "?" +goalName;
           }
           this.buildButton = function() {
               document.getElementById("buttonPlacement").appendChild(goalButton);
