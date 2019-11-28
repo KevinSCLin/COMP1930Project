@@ -35,30 +35,30 @@
   db.collection("Users").doc(user).collection("Goals").get().then(function (querySnapshot) {
     querySnapshot.forEach(function(doc){
       // create div tag for each goal doc in data base
+      // if (doc.data().completed !== true ) {
+          var div = document.createElement("div");
+          div.className = "Goals";
 
-      var div = document.createElement("div");
-      div.className = "Goals";
-
-      div.id = "Goal" + index;
-      div.onclick=function () {
-          window.location.href="goalsummarypage.html?" + div.id;
-      };
-      //Create progress Bars
-        // create progress percentage
-      //create an anchor tag for each
-      //create stylesheet for each div tag
-      var styleSheet = document.createElement("style");
-      styleSheet.innerHTML="#goal" + index + "{top: " + (22.8 + 15 * index) + "%;}"
-      document.head.appendChild(styleSheet);
-      index++;
-      //create a text node based on the name saved in database
-      var para = document.createElement("p");
-      var node = document.createTextNode(doc.data().name);
-      //append created elements to html page
-      para.appendChild(node);
-      div.appendChild(para);
-      document.body.appendChild(div)
-
+          div.id = "Goal" + index;
+          div.onclick = function () {
+              window.location.href = "goalsummarypage.html?" + div.id;
+          };
+          //Create progress Bars
+          // create progress percentage
+          //create an anchor tag for each
+          //create stylesheet for each div tag
+          var styleSheet = document.createElement("style");
+          styleSheet.innerHTML = "#goal" + index + "{top: " + (22.8 + 15 * index) + "%;}"
+          document.head.appendChild(styleSheet);
+          index++;
+          //create a text node based on the name saved in database
+          var para = document.createElement("p");
+          var node = document.createTextNode(doc.data().name);
+          //append created elements to html page
+          para.appendChild(node);
+          div.appendChild(para);
+          document.body.appendChild(div)
+      // }
       })
   })
 </script>

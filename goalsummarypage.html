@@ -58,11 +58,22 @@
                     })
                         .then(function () {
                             subgoalsCompleted++;
+                            let completionStatus = false;
+                            if (subgoalsCompleted >= subgoalTotal) {
+                                subgoalsCompleted = subgoalTotal;
+                                completionStatus = true;
+                            }
                             db.collection("Users").doc(user).collection("Goals").doc(goalID).update({
                                 subgoals: subgoalTotal,
                                 completedSubgoals: subgoalsCompleted,
+                                completePercetage: subgoalTotal/subgoalsCompleted,
+                                completed:completionStatus,
+                            }).then(function (){
+                                if (completionStatus === true){
+                                    window.location.href="main.html"
+                                }
                             })
-                            console.log("true")
+
                         })
                 }
             }
