@@ -1,59 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/mainstyle.css">
-  <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
-  <script src="scripts/app.js"> var db=firebase.firestore();</script>
-  <script src="scripts/loginverification.js"></script>
 
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/mainstyle.css">
+    <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+    <script src="scripts/app.js">
+        var db = firebase.firestore();
+    </script>
+    <script src="scripts/loginverification.js"></script>
 
-</head>
-<body>
-  <nav class=navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar style="background-color: #63E2E2; height:7.12%">
-    <a class="nav-item nav-link active" id="home" href="main.html">Home</a>
-    <a class="nav-item nav-link" id=journals href="journals.html">Journals</a>
-    <a class="nav-item nav-link" id="goals" href="goals.html">Goals</a>
-    <a class="nav-item nav-link" id="settings" href="settings.html">Settings</a>
-  </nav> 
-      
-  <div class="container"><h1 id="text">Goals at a Glance</h1></div>
-    
+    <head>
 
-<script>
-  let index = 0;
-  db.collection("Users").doc(user).collection("Goals").get().then(function (querySnapshot) {
-    querySnapshot.forEach(function(doc){
-      // create div tag for each goal doc in data base
-      var div = document.createElement("div");
-      div.className = "Goals";
-      div.id = "goal" + index;
-      //create an anchor tag for each
-      let anchor = document.createElement("a")
-      anchor.href = "goalsummarypage.html"
-      anchor.appendChild(div)
-      //create stylesheet for each div tag
-      var styleSheet = document.createElement("style")
-      styleSheet.innerHTML="#goal" + index + "{top: " + (22.8 + 15 * index) + "%;}"
-      document.head.appendChild(styleSheet);
-      index++;
-      //create a text node based on the name saved in database
-      var para = document.createElement("p");
-      var node = document.createTextNode(doc.data().name);
-      //append created elements to html page
-      para.appendChild(node);
-      div.appendChild(para);
-      document.body.appendChild(anchor);
-      })
-  })
-</script>
-    
-    
-    
-</body>
+    </head>
+
+    <body>
+        <nav class=navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar style="background-color: #63E2E2; height:7.12%">
+            <a class="nav-item nav-link active" id="home" href="main.html">Home</a>
+            <a class="nav-item nav-link" id=journals href="journals.html">Journals</a>
+            <a class="nav-item nav-link" id="goals" href="goals.html">Goals</a>
+            <a class="nav-item nav-link" id="settings" href="settings.html">Settings</a>
+        </nav>
+
+        <div class="container">
+            <h1 id="text">Goals at a Glance</h1>
+        </div>
+
+
+        <script>
+            let index = 0;
+            db.collection("Users").doc(user).collection("Goals").get().then(function(querySnapshot) {
+                querySnapshot.forEach(function(doc) {
+                    // create div tag for each goal doc in data base
+                    var div = document.createElement("div");
+                    div.className = "Goals";
+                    div.id = "goal" + index;
+                    //create an anchor tag for each
+                    let anchor = document.createElement("a")
+                    anchor.href = "goalsummarypage.html"
+                    anchor.appendChild(div)
+                        //create stylesheet for each div tag
+                    var styleSheet = document.createElement("style")
+                    styleSheet.innerHTML = "#goal" + index + "{top: " + (22.8 + 15 * index) + "%;}"
+                    document.head.appendChild(styleSheet);
+                    index++;
+                    //create a text node based on the name saved in database
+                    var para = document.createElement("p");
+                    var node = document.createTextNode(doc.data().name);
+                    para.style.fontSize = "18px";
+                    para.style.borderRadius = "10px";
+                    para.style.width = "100%";
+                    //append created elements to html page
+                    para.appendChild(node);
+                    div.appendChild(para);
+                    document.body.appendChild(anchor);
+                })
+            })
+        </script>
+
+
+
+    </body>
