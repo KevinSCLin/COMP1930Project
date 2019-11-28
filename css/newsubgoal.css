@@ -4,7 +4,7 @@
     margin-left: auto;
     margin-right: auto;
     width: 100%;
-    top: 15%;
+    top: 20%;
     color: #8FD2D2;
     font-family: Roboto;
 }
@@ -12,8 +12,8 @@
 #button {
     position: fixed;
     width: 39.7%;
-    height: 6.52%;
-    top: 90.7%;
+    height: 8%;
+    top: 85%;
     left: 30%;
     text-align: center;
     font-family: Roboto;
