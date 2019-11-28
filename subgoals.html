@@ -30,40 +30,64 @@
 
     <div class="form-group">
         <label class="form-control-label" for="goalname">Subgoal #1</label>
-        <input class="form-control" type="text" id="subgoalname1" placeholder="Your Subgoal">
+        <input class="form-control" type="text" id="goalname1" placeholder="Your Subgoal">
     </div>
     <div class="form-group">
         <label class="form-control-label" for="goalname">Subgoal #2</label>
-        <input class="form-control" type="text" id="subgoalname2" placeholder="Your Subgoal">
+        <input class="form-control" type="text" id="goalname2" placeholder="Your Subgoal">
     </div>
 
     <div class="form-group">
         <label class="form-control-label" for="goalname">Subgoal #3</label>
-        <input class="form-control" type="text" id="subgoalname3" placeholder="Your Subgoal">
+        <input class="form-control" type="text" id="goalname3" placeholder="Your Subgoal">
     </div>
     <div class="form-group">
         <label class="form-control-label" for="goalname">Subgoal #4</label>
-        <input class="form-control" type="text" id="subgoalname4" placeholder="Your Subgoal">
+        <input class="form-control" type="text" id="goalname4" placeholder="Your Subgoal">
     </div>
     <div class="form-group">
         <label class="form-control-label" for="goalname">Subgoal #5</label>
-        <input class="form-control" type="text" id="subgoalname5" placeholder="Your Subgoal">
+        <input class="form-control" type="text" id="goalname5" placeholder="Your Subgoal">
     </div>
 
     <input type="submit" id="submitGoal">
 
     <script>
-        localStorage.setItem('newGoal', 'Goal' + index);
-
-
+        console.log("adding subgoals to:" + localStorage.getItem('newGoal'));
+        let subgoalBox1 = document.getElementById("goalname1");
+        let subgoalBox2 = document.getElementById("goalname2");
+        let subgoalBox3 = document.getElementById("goalname3");
+        let subgoalBox4 = document.getElementById("goalname4");
+        let subgoalBox5 = document.getElementById("goalname5");
+        
         //set up writing to database by clicking submit
         let index = localStorage.getItem("Index"); //index of subgoal #
+
         document.getElementById("goalform").addEventListener('submit', processForm);
         function processForm(e) {
             e.preventDefault()
             //take input from input fields and store in firestore
-            db.collection("Users").doc(user).collection("Goals").doc(localStorage.getItem('newGoal')).collection("Subgoals").doc("Subgoal" + index).set({
-                name: document.getElementById("goalname").value // subgoal name
+            let subgoalCollection = db.collection("Users").doc(user).collection("Goals").doc(localStorage.getItem('newGoal')).collection("Subgoals");
+            
+            subgoalCollection.doc("Subgoal" + 1).set({
+                name: document.getElementById("goalname1").value,
+                completed: false
+            });
+            subgoalCollection.doc("Subgoal" + 2).set({
+                name: document.getElementById("goalname2").value,
+                completed: false
+            });
+            subgoalCollection.doc("Subgoal" + 3).set({
+                name: document.getElementById("goalname3").value,
+                completed: false
+            });
+            subgoalCollection.doc("Subgoal" + 4).set({
+                name: document.getElementById("goalname4").value,
+                completed: false
+            });
+            subgoalCollection.doc("Subgoal" + 5).set({
+                name: document.getElementById("goalname5").value,
+                completed: false
             })
                 .then(function () {
                     //increase index for next goal and set it in local memory
