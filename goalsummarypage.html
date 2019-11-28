@@ -23,5 +23,36 @@
     <div class="container">
       <a href="main.html"><button id="backbutton">Back</button></a>
     </div>
+
+<script>
+    var query = decodeURI(window.location.search);
+    var queries = query.split("?");
+    var goalID = queries[1];
+    console.log(goalID);
+    let index = 1;
+    db.collection("Users").doc(user).collection("Goals").doc(goalID).collection("Subgoals").get().
+    then(function (querySnapshot) {
+        querySnapshot.forEach(function(doc){
+            // create div tag for each goal doc in data base
+            console.log(doc.name);
+            var inputEl = document.createElement("input");
+            inputEl.className = "subgoals";
+            InputEl.id = "subgoal" + index;
+            inputEl.type = "checkbox";
+            //create stylesheet for each div tag
+            var styleSheet = document.createElement("style")
+            styleSheet.innerHTML="#subgoal" + index + "{top: " + (22.8 + 15 * index) + "%;}"
+            document.head.appendChild(styleSheet);
+            index++;
+            //create a text node based on the name saved in database
+            var para = document.createElement("p");
+            var node = document.createTextNode(doc.data().name);
+            //append created elements to html page
+            para.appendChild(node);
+            inputEl.appendChild(para);
+            document.body.appendChild(anchor);
+        })
+    })
+</script>
 </body>
 </html>

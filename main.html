@@ -35,8 +35,8 @@
       div.className = "Goals";
       div.id = "goal" + index;
       //create an anchor tag for each
-      let anchor = document.createElement("a")
-      anchor.href = "goalsummarypage.html"
+      let anchor = document.createElement("a");
+      anchor.href = "goalsummarypage.html?"+ div.id;
       anchor.appendChild(div)
       //create stylesheet for each div tag
       var styleSheet = document.createElement("style")

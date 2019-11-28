@@ -1,0 +1,22 @@
+.Goals{
+    position: fixed;
+    width: 70.4%;
+    height: 5.96%;
+    left: 0px;
+    top: 22.8%;
+
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.333333px;
+
+    color: #000000;
+
+    background: #57DFDF;
+}

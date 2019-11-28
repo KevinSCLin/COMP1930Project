@@ -32,7 +32,7 @@
 
     <div class="form-group">
     <label class="form-control-label" for="deadline">Set Deadline</label>
-    <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text"/>
+    <input class="form-control" id="deadline" name="date" placeholder="MM/DD/YYYY" type="text"/>
     </div>
 
     <div class="form-group">
@@ -42,10 +42,10 @@
       <option value="high">High</option>
       <option value="medium">Medium</option>
       <option value="low">Low</option>
+      </select>
+    </div>
     </fieldset>
     </form>
-    </select>
-    </div>
     <input type="submit" id="submitGoal">
     
     <script>
@@ -55,27 +55,28 @@
       let existingGoals = [];
       goalDoc.get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {   //for each element in querySnapshot, execute the anonymous function
-          existingGoals.push(doc.id);    //getting doc id of each goal
+          existingGoals.push(doc.id); //getting doc id of each goal
+          console.log(existingGoals);
           console.log(doc.id);
         });
       });
       //Kevin's codes end here, mostly
-      
+
       document.getElementById("goalform").addEventListener('submit',processForm);
       function processForm(e){
         e.preventDefault()
         let index = existingGoals.length + 1; //index of current goal number
         //take input from input fields and store in firestore
         localStorage.setItem('newGoal', 'Goal' + index);
-        db.collection("Users").doc(user).collection("Goals").doc("Goal" + index).set({
+        goalDoc.doc("Goal" + index).set({
             name: document.getElementById("goalname").value, // goal name
-            deadline: document.getElementById("date").value, 
+            deadline: document.getElementById("date").value,
             priority: document.getElementById("priority").value
           })
           .then(function () {
             //increase index for next goal and set it in local memory
             index++;
-            localStorage.setItem("index", index)
+            localStorage.setItem("index", index);
             console.log("Successfully added data ");
             window.location.href="goalsuccessfullyadded.html"
           })
@@ -83,7 +84,7 @@
             console.log("error")
           });
 
-      };
+      }
     
 
     </script>
