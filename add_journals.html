@@ -32,32 +32,31 @@
         let queryString = decodeURIComponent(window.location.search);
         let URLsplitArr = queryString.split("?");
         let docID = URLsplitArr[1];
+        let goalName  = URLsplitArr[2];
         let journal = document.getElementById("journalValue");
-        
+        let goalDoc = db.collection("Users").doc(user).collection("Goals");
+        document.getElementById("text").innerHTML = goalName;
+
         //Get current saved journal count
         let JournalDoc = db.collection("Users").doc(user).collection("Goals").doc(docID).collection("Journals");
         let journalArr = [];
+        let index;
         JournalDoc.get().then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
                 journalArr.push(doc.id);
+                console.log(doc.id);
             })
-        });
-
-        //
-        goalDoc.get().then(function(doc) {
-            console.log(doc.data());
-            let goalName = doc.data()["name"];
-            console.log(goalName);
-            document.getElementById("text").innerHTML = goalName;
-
+            index = journalArr.length
+            console.log(journalArr);
+            console.log("current journal doc count is " + index);
         });
 
         // Save button function
         let saveButton = document.getElementById("submitJournal");
+        goalDoc = db.collection("Users").doc(user).collection("Goals").doc(docID);
         saveButton.onclick = function() {
-            let index = journalArr.length;
             let journal = document.getElementById("journalValue").value;
-            let journalDoc = goalDoc.collection("Journals").doc("entry" + index).set({
+            let journalDoc = goalDoc.collection("Journals").doc("entry" + (index + 1)).set({
             journalText: journal,
             date: new Date().getTime()
             })
