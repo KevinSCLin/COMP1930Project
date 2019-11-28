@@ -97,11 +97,10 @@ html {
 }
 
 .Goals {
-    position: fixed;
+    position: absolute;
     width: 70%;
     height: 5.96%;
     left: 0px;
-    top: 22.8%;
     border-radius: 25px;
     font-family: Roboto;
     font-style: normal;

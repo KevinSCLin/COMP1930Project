@@ -15,10 +15,6 @@
     </script>
     <script src="scripts/loginverification.js"></script>
 
-    <head>
-
-    </head>
-
     <body>
         <nav class=navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar style="background-color: #63E2E2; height:7.12%">
             <a class="nav-item nav-link active" id="home" href="main.html">Home</a>
@@ -35,10 +31,9 @@
   db.collection("Users").doc(user).collection("Goals").get().then(function (querySnapshot) {
     querySnapshot.forEach(function(doc){
       // create div tag for each goal doc in data base
-      // if (doc.data().completed !== true ) {
+      if (doc.data().completed !== true ) {
           var div = document.createElement("div");
           div.className = "Goals";
-
           div.id = "Goal" + index;
           div.onclick = function () {
               window.location.href = "goalsummarypage.html?" + div.id;
@@ -48,7 +43,7 @@
           //create an anchor tag for each
           //create stylesheet for each div tag
           var styleSheet = document.createElement("style");
-          styleSheet.innerHTML = "#goal" + index + "{top: " + (22.8 + 15 * index) + "%;}"
+          styleSheet.innerHTML = "#Goal" + index + "{position:absolute; top: " + (22.8 + (15 * (index-1))) + "%;}";
           document.head.appendChild(styleSheet);
           index++;
           //create a text node based on the name saved in database
@@ -58,7 +53,7 @@
           para.appendChild(node);
           div.appendChild(para);
           document.body.appendChild(div)
-      // }
+      }
       })
   })
 </script>
