@@ -49,12 +49,24 @@
     <input type="submit" id="submitGoal">
     
     <script>
-      //set up writing to database by clicking submit
-      let index=localStorage.getItem("Index"); //index of goal #
+      //Kevin's codes
+      //Getting existing goals into an array to get index id for next goal
+      let goalDoc = db.collection("Users").doc(user).collection("Goals");
+      let existingGoals = [];
+      goalDoc.get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {   //for each element in querySnapshot, execute the anonymous function
+          existingGoals.push(doc.id);    //getting doc id of each goal
+          console.log(doc.id);
+        });
+      });
+      //Kevin's codes end here, mostly
+      
       document.getElementById("goalform").addEventListener('submit',processForm);
       function processForm(e){
         e.preventDefault()
+        let index = existingGoals.length + 1; //index of current goal number
         //take input from input fields and store in firestore
+        localStorage.setItem('newGoal', 'Goal' + index);
         db.collection("Users").doc(user).collection("Goals").doc("Goal" + index).set({
             name: document.getElementById("goalname").value, // goal name
             deadline: document.getElementById("date").value, 
@@ -70,6 +82,7 @@
           .catch(function(error) {
             console.log("error")
           });
+
       };
     
 

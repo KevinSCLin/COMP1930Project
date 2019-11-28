@@ -21,22 +21,23 @@
         <a class="nav-item nav-link" id="settings" href="settings.html">Settings</a>
     </nav> 
     <h2 id="text">Journals</h2>
-    <h3 id="instruction">Please select a goal to edit its attached journal</h3>
+    <div id="pastJournals"></div>
+    <h3 id="instruction">Please tap a goal to add or edit your journal</h3>
     <br><br><br><br><br>
     <div id="buttonPlacement"></div>
+    <button id="pastJournals" onclick="gotoPastJounrals()">Past Journals</button>
 
     <script>
       let documentID = [];
       let goalName = [];
       let journalDoc = db.collection("Users").doc(user).collection("Goals");
       journalDoc.get().then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
+        querySnapshot.forEach(function(doc) {   //for each element in querySnapshot, execute the anonymous function
           documentID.push(doc.id);
           goalName.push(doc.data()["name"]);
-          console.log(doc.id, " => ", doc.data());   //doc.id is the document name
-          
-          generateAllButtons()  // Generate all buttons
+          //console.log(doc.id, " => ", doc.data());   //doc.id is the document name
         });
+        generateAllButtons()  // Generate all buttons
       });
 
       function createGoalButtonForJournal(docID, goalName) {
@@ -56,17 +57,32 @@
               document.getElementById("buttonPlacement").appendChild(goalButton);
           }
       }
-      console.log(documentID);
-      console.log(goalName);
       
       function generateAllButtons() {
           // Generate buttons with goals inside. Click will go to add journals page 
           for (let i=0;i<documentID.length;i++) {
+              console.log(documentID.length + " is documentID count");
               let currentButton = new createGoalButtonForJournal(documentID[i], goalName[i]);
               currentButton.buildButton();
         }
       }
 
+      // Retrieve past journals and generate blocks of them using js
+      let journalArr = [];
+      // Loop through all goal documents to find all journals
+      for (i=0;i<documentID.length;i++) {
+      let savedJournal = db.collection("Users").doc(user).collection("Goals").doc("Goalnull").collection("Journals").doc("entry1");
+          savedJournal.get().then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+              journalArr.push(doc.data().journalText);
+              console.log(doc.data().journalText);
+            })
+          })
+      }
+
+      function gotoPastJounrals() {
+        window.location.href = "pastjournals.html";
+      }
     </script>
     
 </body>

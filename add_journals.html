@@ -51,7 +51,8 @@
         saveButton.onclick = function() {
             let journal = document.getElementById("journalValue").value;
             let journalDoc = goalDoc.collection("Journals").doc("entry1").set({
-            journalText: journal
+            journalText: journal,
+            date: new Date().getTime()
             })
             .then(function() {
                 console.log("Journal entry successfully saved!");

@@ -115,6 +115,26 @@ body, html {
 		align-items: center;
 		text-align: left;
 		letter-spacing: -0.333333px;
-
     	color: #078686;
+	}
+
+	#title {
+		position: fixed;
+		top: 7%;
+		font-size: 25px;
+	}
+
+	#descriptor {
+		position: fixed;
+		top: 14%;
+		font-size: 22px;
+	}
+
+	.journalParagraph {
+		top: 170px;
+		position: relative;
+		background-color: aquamarine;
+		border-radius: 10px;
+		border: 2px solid black;
+		left: 5px;
 	}
