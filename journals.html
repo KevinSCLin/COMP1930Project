@@ -25,7 +25,7 @@
     <h3 id="instruction">Please tap a goal to add or edit your journal</h3>
     <br><br><br><br><br>
     <div id="buttonPlacement"></div>
-    <button id="pastJournals">Past Journals</button>
+    <button id="pastJournals" onclick="gotoPastJounrals()">Past Journals</button>
 
     <script>
       let documentID = [];
@@ -80,7 +80,7 @@
           })
       }
 
-      document.getElementById("pastJournals").onclick = function () {
+      function gotoPastJounrals() {
         window.location.href = "pastjournals.html";
       }
     </script>
