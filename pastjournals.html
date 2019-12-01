@@ -17,7 +17,7 @@
             <a class="nav-item nav-link active" id="home" href="main.html">Home</a>
             <a class="nav-item nav-link" id=journals href="journals.html">Journals</a>
             <a class="nav-item nav-link" id="goals" href="goals.html">Goals</a>
-            <a class="nav-item nav-link" id="logoutbutton" href="index.html">Log Out</a>
+            <a class="nav-item nav-link" id="logoutbutton" href="index.html">Log Out</a></nav>
     <h1 id="title">Past Journals</h1>
     <h2 id="instruction">Click on a goal to view all saved journals of the clicked goal</h2>
     <div id="JournalPlacement"></div>
@@ -39,13 +39,6 @@ let documentID = [];
       function createGoalButtonForJournal(docID, goalName) {
           let journalItems = document.createElement("button");
           journalItems.setAttribute("class", "journalItems");
-          journalItems.style.backgroundColor = "#8FD2D2";
-          journalItems.style.fontSize = "18px";
-          journalItems.style.borderRadius = "10px";
-          journalItems.style.width = "90%";
-          journalItems.style.height = "50px";
-          journalItems.style.margin = "5px";
-          journalItems.style.top = "20%";
           journalItems.innerHTML = goalName;
           journalItems.onclick = function() {  // click to add docID to query string and go to add_journals URL
               window.location.href = "pastjournals_view.html?" + docID + "?" + goalName;
