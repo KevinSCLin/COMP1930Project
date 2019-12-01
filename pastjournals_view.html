@@ -18,21 +18,21 @@
             <a class="nav-item nav-link" id=journals href="journals.html">Journals</a>
             <a class="nav-item nav-link" id="goals" href="goals.html">Goals</a>
             <a class="nav-item nav-link" id="logoutbutton" href="index.html">Log Out</a>
-    <h1 id="title"></h1>
+    <h1 id="goalNameh1"></h1>
     <div id="JournalPlacement"></div>
-    <h2 id="goalNameh2"></h2>
 
 <script>
     let queryString = decodeURIComponent(window.location.search);
     let URLsplitArr = queryString.split("?");
     let goalDoc = URLsplitArr[1];
     let goalName = URLsplitArr[2];
-    document.getElementById("title").innerHTML = goalName;
+    document.getElementById("goalNameh1").innerHTML = goalName;
     let goalDocPath = db.collection("Users").doc(user).collection("Goals").doc(goalDoc).collection("Journals");
     let journalArr = [];
     let dateArr = [];
 
     //Retrieving all exising journals
+    //:param date: key "date" in Firestore
     goalDocPath.orderBy("date", "desc")
     .get()
     .then(function(querySnapshot) {
@@ -53,10 +53,12 @@
     })
 
     //Append journals to page
+    //:param date: an int representing date in seconds
+    //:param text: a string represent journal texts
     function createJournalParagraphs(date, text) {
         let newParagraph = document.createElement("p");
         newParagraph.setAttribute("class", "journalText");
-        newParagraph.innerHTML = date + "<br><br>" + text;
+        newParagraph.innerHTML = "<em>" + date + "</em>" + "<br><br>" + text;
         this.createParagraph = function () {
             document.getElementById("JournalPlacement").appendChild(newParagraph);
         };

@@ -24,9 +24,11 @@
 
 <script>
 
-let documentID = [];
+      let documentID = [];
       let goalName = [];
       let journalDoc = db.collection("Users").doc(user).collection("Goals");
+
+      //Fetching all doc.id and push into documentID array
       journalDoc.get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {   //for each element in querySnapshot, execute the anonymous function
           documentID.push(doc.id);
@@ -47,9 +49,8 @@ let documentID = [];
               document.getElementById("JournalPlacement").appendChild(journalItems);
           }
       }
-      
+      // Generate buttons with goals inside. Click will go to add journals page 
       function generateAllButtons() {
-          // Generate buttons with goals inside. Click will go to add journals page 
           for (let i=0;i<documentID.length;i++) {
               console.log(documentID.length + " is documentID count");
               let currentButton = new createGoalButtonForJournal(documentID[i], goalName[i]);

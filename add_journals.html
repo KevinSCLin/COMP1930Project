@@ -27,6 +27,9 @@
         <textarea class="form-control" id="journalValue" rows="12"></textarea>
     </div>
     <button id="submitJournal">Save</button>
+    <div id="errorDiv">
+        <p id="errorMessage"></p>
+    </div>
 
     <script>
         // get goal docID
@@ -55,21 +58,31 @@
         // Save button function
         let saveButton = document.getElementById("submitJournal");
         goalDoc = db.collection("Users").doc(user).collection("Goals").doc(docID);
-        saveButton.onclick = function() {
-            let journal = document.getElementById("journalValue").value;
-            let journalDoc = goalDoc.collection("Journals").doc("entry" + (index + 1)).set({
-            journalText: journal,
-            date: new Date().getTime()
-            })
-            .then(function() {
-                console.log("Journal entry successfully saved!");
-                window.location.href="journalsuccessfullyadded.html"
-            })
-            .catch(function(error) {
-                console.error("Error saving journal entry: ", error);
-            })
 
+        //Save button function
+        saveButton.onclick = function() {
+            if (journal.value != "") {
+                let journal = document.getElementById("journalValue").value;
+                let journalDoc = goalDoc.collection("Journals").doc("entry" + (index + 1)).set({
+                journalText: journal,
+                date: new Date().getTime()
+                })
+                .then(function() {
+                    console.log("Journal entry successfully saved!");
+                    window.location.href="journalsuccessfullyadded.html"
+                })
+                .catch(function(error) {
+                    console.error("Error saving journal entry: ", error);
+                })
+
+            } else {
+                document.getElementById("errorMessage").innerHTML = "<br> Journal field cannot be empty";
+                setTimeout(function() {
+                    document.getElementById("errorMessage").innerHTML = "";
+                }, 3000);
+            }
         }
+
     </script>
 </body>
 </html>
