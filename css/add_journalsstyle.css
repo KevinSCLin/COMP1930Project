@@ -4,6 +4,7 @@ body, html {
     background-repeat:no-repeat;
     background: linear-gradient(180deg, rgba(238, 249, 249, 0.99) 24.77%, rgba(215, 247, 247, 0.993002) 32.81%,
      #A2F3F3 51.56%, #61F1F1 74.48%);
+     background-attachment: fixed;
 }
 #text {
     position: fixed;
