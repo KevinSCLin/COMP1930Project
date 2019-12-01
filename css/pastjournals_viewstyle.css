@@ -119,6 +119,32 @@ body, html {
 	}
 
 	#goalNameh1 {
-		margin:70px 20px 20px 0px;
+		position: relative;
+		margin:70px 20px 10px 0px;
 		font-size: 25px;
+		display: inline-block;
+	}
+
+	#orderBy {
+		top: 15%;
+		position: relative;
+		display: inline-block;
+		margin: 10px 10px 10px 10px;
+		width: 80%;
+	}
+	#sortTitle {
+		position: relative;
+		font-size:20px;
+	}
+
+	#orderByNewest,
+	#orderByOldest {
+		position: relative;
+		display: inline;
+		background-color: #8FD2D2;
+		border-radius: 5px;
+		box-shadow: 2px 2px 2px;
+		margin: 10px 10px 10px 10px;
+		font-size: 20px;
+		text-align: center;
 	}

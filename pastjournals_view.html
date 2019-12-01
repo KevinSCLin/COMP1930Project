@@ -11,6 +11,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
     <script src="scripts/app.js"> var db=firebase.firestore();</script>
     <script src="scripts/loginverification.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
     <nav class=navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar style="background-color: #63E2E2; height:7.12%">
@@ -19,7 +20,13 @@
             <a class="nav-item nav-link" id="goals" href="goals.html">Goals</a>
             <a class="nav-item nav-link" id="logoutbutton" href="index.html">Log Out</a>
     <h1 id="goalNameh1"></h1>
+    <div id="orderBy">
+            <label id="sortTitle">Order By</p> 
+            <button class="sortButton" id="orderByNewest">Latest</button> 
+            <button class="sortButton" id="orderByOldest">Oldest</button>
+        </div>
     <div id="JournalPlacement"></div>
+
 
 <script>
     let queryString = decodeURIComponent(window.location.search);
@@ -30,39 +37,55 @@
     let goalDocPath = db.collection("Users").doc(user).collection("Goals").doc(goalDoc).collection("Journals");
     let journalArr = [];
     let dateArr = [];
+    sortByTime("desc");
 
-    //Retrieving all exising journals
-    //:param date: key "date" in Firestore
-    goalDocPath.orderBy("date", "desc")
-    .get()
-    .then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-            console.log(doc.id, " => ", doc.data());
-            journalArr.push(doc.data()["journalText"])
-            dateArr.push(doc.data()["date"]);
-        });
-        for (i=0;i<journalArr.length;i++) {
-            let currentDate = new Date(dateArr[i]);
-            currentDate = currentDate.toString("MM/DD/YYYY")
-            let newJournal = new createJournalParagraphs(currentDate, journalArr[i]);
-            newJournal.createParagraph();
-        }
-    })
-    .catch(function(error) {
-        console.log("Error getting saved journals: ", error);
-    })
+    document.getElementById("orderByNewest").onclick = function() {
+        sortByTime("desc");
+    }
 
-    //Append journals to page
-    //:param date: an int representing date in seconds
-    //:param text: a string represent journal texts
-    function createJournalParagraphs(date, text) {
-        let newParagraph = document.createElement("p");
-        newParagraph.setAttribute("class", "journalText");
-        newParagraph.innerHTML = "<em>" + date + "</em>" + "<br><br>" + text;
-        this.createParagraph = function () {
-            document.getElementById("JournalPlacement").appendChild(newParagraph);
+    document.getElementById("orderByOldest").onclick = function() {
+        sortByTime("asc");
+    }
+
+    //sort journal from newest to oldest
+    function sortByTime(sortBy) {
+        //remove exsting journals
+        removeJournal();
+        goalDocPath.orderBy("date", sortBy)
+            .get()
+            .then(function(querySnapshot) {
+                journalArr = [];
+                dateArr = [];
+                querySnapshot.forEach(function(doc) {
+                    console.log(doc.id, " => ", doc.data());
+                    journalArr.push(doc.data()["journalText"])
+                    dateArr.push(doc.data()["date"]);
+                });
+                for (let i=0;i<journalArr.length;i++) {
+                    let currentDate = new Date(dateArr[i]);
+                    currentDate = currentDate.toString("MM/DD/YYYY")
+                    let newJournal = new createJournalParagraphs(currentDate, journalArr[i]);
+                    newJournal.createParagraph();
+                }
+            })
+            .catch(function(error) {
+                console.log("Error getting saved journals: ", error);
+            })
+            function createJournalParagraphs(date, text) {
+                let newParagraph = document.createElement("p");
+                newParagraph.setAttribute("class", "journalText");
+                newParagraph.innerHTML = "<em>" + date + "</em>" + "<br><br>" + text;
+                this.createParagraph = function () {
+                    document.getElementById("JournalPlacement").appendChild(newParagraph);
         };
     };
+    
+    // Remove all journals using jQuery
+    function removeJournal() {
+        $(".journalText").remove();
+    }
+
+}
 </script>
 
 
