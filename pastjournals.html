@@ -37,21 +37,21 @@ let documentID = [];
       });
 
       function createGoalButtonForJournal(docID, goalName) {
-          let goalButton = document.createElement("button");
-          goalButton.setAttribute("class", "goalButton");
-          goalButton.style.backgroundColor = "#8FD2D2";
-          goalButton.style.fontSize = "18px";
-          goalButton.style.borderRadius = "10px";
-          goalButton.style.width = "90%";
-          goalButton.style.height = "50px";
-          goalButton.style.margin = "5px";
-          goalButton.style.top = "20%";
-          goalButton.innerHTML = goalName;
-          goalButton.onclick = function() {  // click to add docID to query string and go to add_journals URL
+          let journalItems = document.createElement("button");
+          journalItems.setAttribute("class", "journalItems");
+          journalItems.style.backgroundColor = "#8FD2D2";
+          journalItems.style.fontSize = "18px";
+          journalItems.style.borderRadius = "10px";
+          journalItems.style.width = "90%";
+          journalItems.style.height = "50px";
+          journalItems.style.margin = "5px";
+          journalItems.style.top = "20%";
+          journalItems.innerHTML = goalName;
+          journalItems.onclick = function() {  // click to add docID to query string and go to add_journals URL
               window.location.href = "pastjournals_view.html?" + docID + "?" + goalName;
           }
           this.buildButton = function() {
-              document.getElementById("JournalPlacement").appendChild(goalButton);
+              document.getElementById("JournalPlacement").appendChild(journalItems);
           }
       }
       

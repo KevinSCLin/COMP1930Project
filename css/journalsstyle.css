@@ -115,6 +115,26 @@ body, html {
 		align-items: center;
 		text-align: left;
 		letter-spacing: -0.333333px;
-
     	color: #078686;
+	}
+
+	#buttonPlacement {
+		margin: auto;
+		padding: 20px;
+	}
+
+	#pastJournals,
+	#addJournals {
+		position: static;
+		height: 150px;
+		width: 240px;
+		display: inline-block;
+		background-color: #8FD2D2;
+		box-shadow: 5px 5px 5px;
+		vertical-align: middle;
+		align-items:center;
+		justify-content: center;
+		border-radius: 10px;
+		margin: 20px;
+		font-size: 25px;
 	}

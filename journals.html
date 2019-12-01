@@ -21,68 +21,24 @@
         <a class="nav-item nav-link" id="goals" href="goals.html">Goals</a>
         <a class="nav-item nav-link" id="logoutbutton" href="index.html">Log Out</a>
     </nav> 
-    <h2 id="text">Journals</h2>
-    <div id="pastJournals"></div>
-    <h3 id="instruction">Please tap a goal to add or edit your journal</h3>
-    <br><br><br><br><br>
-    <button id="pastJournals" onclick="gotoPastJounrals()">Past Journals</button>
-    <div id="buttonPlacement"></div>
-    
+
+    <div id="journalHeader">
+      <h2 id="text">Journals</h2>
+    </div>
+
+
+    <div id="buttonPlacement">
+      <br><br><br><br><br>
+        <button id="pastJournals" onclick="gotoPastJournals()">Past Journals</button>
+        <button id="addJournals" onclick="gotoAddJournals()">Add Journals</button>
+    </div>    
 
     <script>
-      let documentID = [];
-      let goalName = [];
-      let journalDoc = db.collection("Users").doc(user).collection("Goals");
-      journalDoc.get().then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {   //for each element in querySnapshot, execute the anonymous function
-          documentID.push(doc.id);
-          goalName.push(doc.data()["name"]);
-          //console.log(doc.id, " => ", doc.data());   //doc.id is the document name
-        });
-        generateAllButtons()  // Generate all buttons
-      });
-
-      function createGoalButtonForJournal(docID, goalName) {
-          let goalButton = document.createElement("button");
-          goalButton.style.backgroundColor = "#8FD2D2";
-          goalButton.style.fontSize = "18px";
-          goalButton.style.borderRadius = "10px";
-          goalButton.style.width = "90%";
-          goalButton.style.height = "50px";
-          goalButton.style.margin = "5px";
-          goalButton.style.top = "20%";
-          goalButton.innerHTML = goalName;
-          goalButton.onclick = function() {  // click to add docID to query string and go to add_journals URL
-              window.location.href = "add_journals.html?" + docID + "?" +goalName;
-          }
-          this.buildButton = function() {
-              document.getElementById("buttonPlacement").appendChild(goalButton);
-          }
-      }
-      
-      function generateAllButtons() {
-          // Generate buttons with goals inside. Click will go to add journals page 
-          for (let i=0;i<documentID.length;i++) {
-              console.log(documentID.length + " is documentID count");
-              let currentButton = new createGoalButtonForJournal(documentID[i], goalName[i]);
-              currentButton.buildButton();
-        }
+      function gotoAddJournals() {
+        window.location.href = "journal_entry.html";
       }
 
-      // Retrieve past journals and generate blocks of them using js
-      let journalArr = [];
-      // Loop through all goal documents to find all journals
-      for (i=0;i<documentID.length;i++) {
-      let savedJournal = db.collection("Users").doc(user).collection("Goals").doc("Goalnull").collection("Journals").doc("entry1");
-          savedJournal.get().then(function(querySnapshot) {
-            querySnapshot.forEach(function(doc) {
-              journalArr.push(doc.data().journalText);
-              console.log(doc.data().journalText);
-            })
-          })
-      }
-
-      function gotoPastJounrals() {
+      function gotoPastJournals() {
         window.location.href = "pastjournals.html";
       }
     </script>

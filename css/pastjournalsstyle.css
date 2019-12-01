@@ -130,14 +130,6 @@ body, html {
 		font-size: 22px;
 	}
 
-	.journalParagraph {
-		top: 170px;
-		position: relative;
-		background-color: aquamarine;
-		border-radius: 10px;
-		border: 2px solid black;
-		left: 5px;
-	}
 
 	#JournalPlacement{
 		position: fixed;
