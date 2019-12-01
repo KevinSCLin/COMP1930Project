@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/journal_entrystyle.css">
+    <link rel="stylesheet" href="css/navigationAndBackground.css">
+    <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+    <script src="scripts/app.js"> var db=firebase.firestore();</script>
+    <script src="scripts/loginverification.js"></script>
+
+</head>
+
+<body>
+    <!-- Navigation bar -->
+    <nav class=navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar style="background-color: #63E2E2; height:7.12%">
+        <a class="nav-item nav-link active" id="home" href="main.html">Home</a>
+        <a class="nav-item nav-link" id=journals href="journals.html">Journals</a>
+        <a class="nav-item nav-link" id="goals" href="goals.html">Goals</a>
+        <a class="nav-item nav-link" id="logoutbutton" href="index.html">Log Out</a>
+    </nav>
+    <h2 id="text">Add Journals</h2>
+    <h3 id="instruction">Please tap a goal to add or edit your journal</h3>
+    <br><br><br><br><br>
+    <div id="buttonPlacement"></div>
+    <script>
+          let documentID = [];
+      let goalName = [];
+      let journalDoc = db.collection("Users").doc(user).collection("Goals");
+      journalDoc.get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {   //for each element in querySnapshot, execute the anonymous function
+          documentID.push(doc.id);
+          goalName.push(doc.data()["name"]);
+          //console.log(doc.id, " => ", doc.data());   //doc.id is the document name
+        });
+        generateAllButtons()  // Generate all buttons
+      });
+
+      function createGoalButtonForJournal(docID, goalName) {
+          let goalButton = document.createElement("button");
+          goalButton.setAttribute("class", "goalButton");
+          goalButton.innerHTML = goalName;
+          goalButton.onclick = function() {  // click to add docID to query string and go to add_journals URL
+              window.location.href = "add_journals.html?" + docID + "?" +goalName;
+          }
+          this.buildButton = function() {
+              document.getElementById("buttonPlacement").appendChild(goalButton);
+          }
+      }
+      
+      function generateAllButtons() {
+          // Generate buttons with goals inside. Click will go to add journals page 
+          for (let i=0;i<documentID.length;i++) {
+              console.log(documentID.length + " is documentID count");
+              let currentButton = new createGoalButtonForJournal(documentID[i], goalName[i]);
+              currentButton.buildButton();
+        }
+      }
+
+      // Retrieve past journals and generate blocks of them using js
+      let journalArr = [];
+      // Loop through all goal documents to find all journals
+      for (i=0;i<documentID.length;i++) {
+      let savedJournal = db.collection("Users").doc(user).collection("Goals").doc("Goalnull").collection("Journals").doc("entry1");
+          savedJournal.get().then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+              journalArr.push(doc.data().journalText);
+              console.log(doc.data().journalText);
+            })
+          })
+      }
+    </script>
+
+</body>
