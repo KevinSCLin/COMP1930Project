@@ -7,32 +7,12 @@ body, html {
 		 min-height: 100%;
 		 background-attachment: fixed;
 	}
-    #text {
-		position: static;
-		width: 53.6%;
-		height: 6.03%;
-		left: 0px;
-		top: 9.5%;
-
-		font-family: Arial, Helvetica, sans-serif;
-		font-style: normal;
-		font-weight: normal;
-		font-size: 25px;
-		line-height: 29px;
-		display: flex;
-		align-items: center;
-		text-align: center;
-		letter-spacing: -0.333333px;
-
-    	color: #078686;
-	}
 	#goals {
 		position: absolute;
 		left: 50.6%;
 		right: 26.4%;
 		top: 5.26%;
 		bottom: 5.26%;
-	
 		font-family: Roboto;
 		font-style: normal;
 		font-weight: normal;
@@ -42,16 +22,14 @@ body, html {
 		align-items: center;
 		text-align: center;
 		letter-spacing: -0.333333px;
-	
 		color: #000000;
 	}
-	#settings {
+	#logoutbutton {
 		position: absolute;
 		left: 70.8%;
 		right: 2.13%;
 		top: 1.75%;
 		bottom: 3.51%;
-	
 		font-family: Roboto;
 		font-style: normal;
 		font-weight: normal;
@@ -61,17 +39,14 @@ body, html {
 		align-items: center;
 		text-align: center;
 		letter-spacing: -0.333333px;
-	
 		color: #000000;
 	}
-	
 	#home{
 		position: absolute;
 		left: 3.47%;
 		right: 78.13%;
 		top: 1.75%;
 		bottom: 0%;
-	
 		font-family: Roboto;
 		font-style: normal;
 		font-weight: normal;
@@ -81,17 +56,14 @@ body, html {
 		align-items: center;
 		text-align: center;
 		letter-spacing: -0.333333px;
-	
 		color: #000000;
 	}
-	
 	#journals{
-		position: absolute;
+		position: relative;
 		left: 24.93%;
 		right: 52%;
 		top: 0%;
 		bottom: 1.75%;
-	
 		font-family: Roboto;
 		font-style: normal;
 		font-weight: normal;
@@ -101,14 +73,17 @@ body, html {
 		align-items: center;
 		text-align: center;
 		letter-spacing: -0.333333px;
-	
 		color: #000000;
 	} 
+	#title{
+		font-size:25px;
+		position: relative;
+		margin: 100px, 20px, 20px, 20px;
+	}
 	#instruction {
+		margin: 20px, 20px, 20px, 20px;
 		color: #078686;
-		position: static;
-		left: 0px;
-		top: 17%;
+		position: relative;
 		font-family: Arial, Helvetica, sans-serif;
 		font-style: normal;
 		font-weight: normal;
@@ -119,14 +94,14 @@ body, html {
 		letter-spacing: -0.333333px;
     	color: #078686;
 	}
-
 	.goalButton{
+		position: relative;
 		background-color: #8FD2D2;
 		font-size: 18px;
 		border-radius: 10px;
 		width: 90%;
 		height: 50px;
-		margin: 10px;
+		margin: 10px 10px 10px 10px;
 		top: 20%;
 		box-shadow: 2px 2px 2px;
 	}

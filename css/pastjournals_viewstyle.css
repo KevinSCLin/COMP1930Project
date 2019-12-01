@@ -1,5 +1,4 @@
 body, html {
-		height: 100%;
     	background-size: cover;
     	background-repeat:no-repeat;
     	background: linear-gradient(180deg, rgba(238, 249, 249, 0.99) 24.77%, rgba(215, 247, 247, 0.993002) 32.81%,
@@ -14,7 +13,6 @@ body, html {
 		right: 26.4%;
 		top: 5.26%;
 		bottom: 5.26%;
-	
 		font-family: Roboto;
 		font-style: normal;
 		font-weight: normal;
@@ -24,7 +22,6 @@ body, html {
 		align-items: center;
 		text-align: center;
 		letter-spacing: -0.333333px;
-	
 		color: #000000;
 	}
 	#settings {
@@ -33,7 +30,6 @@ body, html {
 		right: 2.13%;
 		top: 1.75%;
 		bottom: 3.51%;
-	
 		font-family: Roboto;
 		font-style: normal;
 		font-weight: normal;
@@ -43,7 +39,6 @@ body, html {
 		align-items: center;
 		text-align: center;
 		letter-spacing: -0.333333px;
-	
 		color: #000000;
 	}
 	
@@ -53,7 +48,6 @@ body, html {
 		right: 78.13%;
 		top: 1.75%;
 		bottom: 0%;
-	
 		font-family: Roboto;
 		font-style: normal;
 		font-weight: normal;
@@ -63,7 +57,6 @@ body, html {
 		align-items: center;
 		text-align: center;
 		letter-spacing: -0.333333px;
-	
 		color: #000000;
 	}
 	
@@ -73,7 +66,6 @@ body, html {
 		right: 52%;
 		top: 0%;
 		bottom: 1.75%;
-	
 		font-family: Roboto;
 		font-style: normal;
 		font-weight: normal;
@@ -83,24 +75,43 @@ body, html {
 		align-items: center;
 		text-align: center;
 		letter-spacing: -0.333333px;
-	
 		color: #000000;
 	} 
 
+	#logoutbutton {
+		position: absolute;
+		left: 70.8%;
+		right: 2.13%;
+		top: 1.75%;
+		bottom: 3.51%;
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 20px;
+		line-height: 23px;
+		display: flex;
+		align-items: center;
+		text-align: center;
+		letter-spacing: -0.333333px;
+		color: #000000;
+	}
+
 	#title {
-		position: fixed;
-		top: 7%;
+		position: relative;
+		margin: 100px 20px 20px 20px;
+		display: inline-block;
 		font-size: 25px;
 	}
 
 	#JournalPlacement{
-		position: fixed;
+		position: relative;
 		top: 25%;
 	}
 
 	p.journalText{
 		color: black;
-		background-color: #078686;
+		display: inline-block;
+		background-color: #57DFDF;
 		width: 90%;
 		border-radius: 10px;
 		padding: 10px;
