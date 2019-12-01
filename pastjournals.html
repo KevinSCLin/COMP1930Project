@@ -36,11 +36,25 @@
           //console.log(doc.id, " => ", doc.data());   //doc.id is the document name
         });
         generateAllButtons()  // Generate all buttons
+
+        //Show only goals with journal entry saved
+        for (i=0;i<documentID.length;i++) {
+            let currentDoc = documentID[i];
+            let journal = journalDoc.doc(currentDoc).collection("Journals").doc("entry1").get().then(function(doc) {
+                if (doc.exists) {
+                  document.getElementById(currentDoc).style.display = "inline-block";
+                }
+            })
+        }
       });
 
+      // Button constructor
+      // Initial visibility set to none, then check for saved journal document later
       function createGoalButtonForJournal(docID, goalName) {
           let journalItems = document.createElement("button");
           journalItems.setAttribute("class", "journalItems");
+          journalItems.setAttribute("id", docID);
+          journalItems.style.display = "none";
           journalItems.innerHTML = goalName;
           journalItems.onclick = function() {  // click to add docID to query string and go to add_journals URL
               window.location.href = "pastjournals_view.html?" + docID + "?" + goalName;
@@ -58,18 +72,19 @@
         }
       }
 
-      // Retrieve past journals and generate blocks of them using js
-      let journalArr = [];
-      // Loop through all goal documents to find all journals
-      for (i=0;i<documentID.length;i++) {
-      let savedJournal = db.collection("Users").doc(user).collection("Goals").doc("Goalnull").collection("Journals").doc("entry1");
-          savedJournal.get().then(function(querySnapshot) {
-            querySnapshot.forEach(function(doc) {
-              journalArr.push(doc.data().journalText);
-              console.log(doc.data().journalText);
-            })
-          })
-      }
+
+      // // Retrieve past journals and generate blocks of them using js
+      // let journalArr = [];
+      // // Loop through all goal documents to find all journals
+      // for (i=0;i<documentID.length;i++) {
+      // let savedJournal = db.collection("Users").doc(user).collection("Goals").doc("Goalnull").collection("Journals").doc("entry1");
+      //     savedJournal.get().then(function(querySnapshot) {
+      //       querySnapshot.forEach(function(doc) {
+      //         journalArr.push(doc.data().journalText);
+      //         console.log(doc.data().journalText);
+      //       })
+      //     })
+      // }
 
 
 </script>
