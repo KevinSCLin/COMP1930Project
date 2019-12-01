@@ -29,61 +29,44 @@
     var query = decodeURI(window.location.search);
     var queries = query.split("?");
     var goalID = queries[1];
-    let index=0;
-    let subgoalTotal=0;
-    let subgoalsCompleted = 0;
+    let ul = document.createElement("ul")
+    ul.className="list-group list-group-flush";
+    function createListElements(doc) {
+
+        //create bootstrap list element
+        let li = document.createElement("li");
+        li.className="list-group-item";
+
+        //create bootstrap div element and append it to list
+        let div = document.createElement("div");
+        div.className ="custom-control custom-checkbox";
+        li.appendChild(div)
+
+        //create bootstrap input and label elements and append to div
+        let input = document.createElement("input");
+        input.type="checkbox";
+        input.className="custom-control-input";
+        input.id = doc.data().name;
+        let label = document.createElement("label");
+        label.className="custom-control-label";
+        label.for=input.id;
+        label.innerHTML= doc.data().name;
+        div.appendChild(input)
+        div.appendChild(label)
+    }
+
+
+
+
+    document.body.appendChild(ul)
     db.collection("Users").doc(user).collection("Goals").doc(goalID).collection("Subgoals").get().
-    then( function (querySnapshot){
+    then(function (querySnapshot){
         querySnapshot.forEach(function(doc) {
             if (doc.data().name !== "") {
-                subgoalTotal++;
-                let div = document.createElement("div");
-                let styleSheet = document.createElement("styleSheet");
-                styleSheet.innerHTML = "#" + doc.id + "{top:" + (22.8 + 15 * index) + ";}";
-                div.id = doc.id;
-                div.innerHTML = doc.data().name;
-                div.class = "subgoals";
-                let inputEl = document.createElement("input");
-                inputEl.id = doc.id + "checkbox";
-                inputEl.type = "checkbox";
-                if (doc.data().completed === true) {
-                    inputEl.checked=true;
-                }
-                div.appendChild(inputEl);
-                document.body.appendChild(div);
-                document.head.appendChild(styleSheet);
-                index++;
-                inputEl.onclick = function () {
-                    db.collection("Users").doc(user).collection("Goals").doc(goalID).collection("Subgoals").doc(doc.id).update({
-                        completed: true,
-                    })
-                        .then(function () {
-                            subgoalsCompleted++;
-                            let completionStatus = false;
-                            if (subgoalsCompleted >= subgoalTotal) {
-                                subgoalsCompleted = subgoalTotal;
-                                completionStatus = true;
-                            }
-                            db.collection("Users").doc(user).collection("Goals").doc(goalID).update({
-                                subgoals: subgoalTotal,
-                                completedSubgoals: subgoalsCompleted,
-                                completePercetage: subgoalTotal/subgoalsCompleted,
-                                completed:completionStatus,
-                            }).then(function (){
-                                if (completionStatus === true){
-                                    window.location.href="main.html"
-                                }
-                            })
-
-                        })
-                }
+                createListElements(doc)
             }
-                })
-
-            })
-
-
-
+        })
+    })
 
 </script>
 </body>
