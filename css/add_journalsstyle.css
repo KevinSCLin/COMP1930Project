@@ -4,6 +4,7 @@ body, html {
     background-repeat:no-repeat;
     background: linear-gradient(180deg, rgba(238, 249, 249, 0.99) 24.77%, rgba(215, 247, 247, 0.993002) 32.81%,
      #A2F3F3 51.56%, #61F1F1 74.48%);
+     background-attachment: fixed;
 }
 #text {
     position: fixed;
@@ -11,7 +12,6 @@ body, html {
     height: 6.03%;
     left: 0px;
     top: 9.5%;
-
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
@@ -21,7 +21,6 @@ body, html {
     align-items: center;
     text-align: center;
     letter-spacing: -0.333333px;
-
     color: #078686;
 }
 #goals {
@@ -30,7 +29,6 @@ body, html {
     right: 26.4%;
     top: 5.26%;
     bottom: 5.26%;
-
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
@@ -40,7 +38,6 @@ body, html {
     align-items: center;
     text-align: center;
     letter-spacing: -0.333333px;
-
     color: #000000;
 }
 #logoutbutton {
@@ -49,7 +46,6 @@ body, html {
     right: 2.13%;
     top: 1.75%;
     bottom: 3.51%;
-
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
@@ -59,7 +55,6 @@ body, html {
     align-items: center;
     text-align: center;
     letter-spacing: -0.333333px;
-
     color: #000000;
 }
 
@@ -69,7 +64,6 @@ body, html {
     right: 78.13%;
     top: 1.75%;
     bottom: 0%;
-
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
@@ -79,7 +73,6 @@ body, html {
     align-items: center;
     text-align: center;
     letter-spacing: -0.333333px;
-
     color: #000000;
 }
 
@@ -89,7 +82,6 @@ body, html {
     right: 52%;
     top: 0%;
     bottom: 1.75%;
-
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
@@ -99,7 +91,6 @@ body, html {
     align-items: center;
     text-align: center;
     letter-spacing: -0.333333px;
-
     color: #000000;
 }
 

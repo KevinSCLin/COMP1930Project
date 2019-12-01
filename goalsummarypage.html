@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/navigationAndBackground.css">
     <link rel="stylesheet" href="css/subgoalsstyle.css">
+    <link rel="stylesheet" href="css/navigationAndBackground.css">
     <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
     <script src="scripts/app.js"> var db=firebase.firestore();</script>
@@ -26,10 +27,45 @@
     </div>
 
 <script>
-    
+    var query = decodeURI(window.location.search);
+    var queries = query.split("?");
+    var goalID = queries[1];
+    let ul = document.createElement("ul")
+    ul.className="list-group list-group-flush";
+    function createListElements(doc) {
+
+        //create bootstrap list element
+        let li = document.createElement("li");
+        li.className="list-group-item";
+
+        //create bootstrap div element and append it to list
+        let div = document.createElement("div");
+        div.className ="custom-control custom-checkbox";
+        li.appendChild(div)
+
+        //create bootstrap input and label elements and append to div
+        let input = document.createElement("input");
+        input.type="checkbox";
+        input.className="custom-control-input";
+        input.id = doc.data().name;
+        let label = document.createElement("label");
+        label.className="custom-control-label";
+        label.for=input.id;
+        label.innerHTML= doc.data().name;
+        div.appendChild(input)
+        div.appendChild(label)
+    }
 
 
-
+    document.body.appendChild(ul)
+    db.collection("Users").doc(user).collection("Goals").doc(goalID).collection("Subgoals").get().
+    then(function (querySnapshot){
+        querySnapshot.forEach(function(doc) {
+            if (doc.data().name !== "") {
+                createListElements(doc)
+            }
+        })
+    })
 
 </script>
 </body>

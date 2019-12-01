@@ -4,10 +4,11 @@ body, html {
     	background-repeat:no-repeat;
     	background: linear-gradient(180deg, rgba(238, 249, 249, 0.99) 24.77%, rgba(215, 247, 247, 0.993002) 32.81%,
 		 #A2F3F3 51.56%, #61F1F1 74.48%);
-		background-attachment: fixed;
+		 min-height: 100%;
+		 background-attachment: fixed;
 	}
     #text {
-		position: fixed;
+		position: static;
 		width: 53.6%;
 		height: 6.03%;
 		left: 0px;
@@ -105,7 +106,7 @@ body, html {
 	} 
 	#instruction {
 		color: #078686;
-		position: fixed;
+		position: static;
 		left: 0px;
 		top: 17%;
 		font-family: Arial, Helvetica, sans-serif;
@@ -119,23 +120,13 @@ body, html {
     	color: #078686;
 	}
 
-	#buttonPlacement {
-		margin: auto;
-		padding: 20px;
-	}
-
-	#pastJournals,
-	#addJournals {
-		position: static;
-		height: 150px;
-		width: 240px;
-		display: inline-block;
+	.goalButton{
 		background-color: #8FD2D2;
-		box-shadow: 5px 5px 5px;
-		vertical-align: middle;
-		align-items:center;
-		justify-content: center;
+		font-size: 18px;
 		border-radius: 10px;
-		margin: 20px;
-		font-size: 25px;
+		width: 90%;
+		height: 50px;
+		margin: 10px;
+		top: 20%;
+		box-shadow: 2px 2px 2px;
 	}

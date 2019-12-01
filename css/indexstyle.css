@@ -4,6 +4,7 @@ html {
     background-size: cover;
     background-repeat: no-repeat;
     background: linear-gradient(180deg, rgba(238, 249, 249, 0.99) 24.77%, rgba(215, 247, 247, 0.993002) 32.81%, #A2F3F3 51.56%, #61F1F1 74.48%);
+    background-attachment: fixed;
 }
 
 .container {
@@ -27,6 +28,18 @@ html {
     color: #078686;
 }
 
+#description_div{
+    position: relative;
+    padding: 10px;
+    top: 45%;
+    margin: auto;
+    font-size: 20px;
+}
+
+#website_description {
+    margin: auto;
+}
+
 
 /* 
 position: fixed;
@@ -46,7 +59,7 @@ color: #078686; */
     width: 39.4%;
     height: 6.0%;
     left: 31%;
-    top: 46.9%;
+    top: 60%;
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;

@@ -4,27 +4,10 @@ body, html {
     	background-repeat:no-repeat;
     	background: linear-gradient(180deg, rgba(238, 249, 249, 0.99) 24.77%, rgba(215, 247, 247, 0.993002) 32.81%,
 		 #A2F3F3 51.56%, #61F1F1 74.48%);
-		background-attachment: fixed;
-	}
-    #text {
-		position: fixed;
-		width: 53.6%;
-		height: 6.03%;
-		left: 0px;
-		top: 9.5%;
+		 background-attachment: fixed;
 
-		font-family: Arial, Helvetica, sans-serif;
-		font-style: normal;
-		font-weight: normal;
-		font-size: 25px;
-		line-height: 29px;
-		display: flex;
-		align-items: center;
-		text-align: center;
-		letter-spacing: -0.333333px;
-
-    	color: #078686;
 	}
+
 	#goals {
 		position: absolute;
 		left: 50.6%;
@@ -103,39 +86,23 @@ body, html {
 	
 		color: #000000;
 	} 
-	#instruction {
-		color: #078686;
+
+	#title {
 		position: fixed;
-		left: 0px;
-		top: 17%;
-		font-family: Arial, Helvetica, sans-serif;
-		font-style: normal;
-		font-weight: normal;
-		font-size: 20px;
-		line-height: 29px;
-		align-items: center;
-		text-align: left;
-		letter-spacing: -0.333333px;
-    	color: #078686;
-	}
-
-	#buttonPlacement {
-		margin: auto;
-		padding: 20px;
-	}
-
-	#pastJournals,
-	#addJournals {
-		position: static;
-		height: 150px;
-		width: 240px;
-		display: inline-block;
-		background-color: #8FD2D2;
-		box-shadow: 5px 5px 5px;
-		vertical-align: middle;
-		align-items:center;
-		justify-content: center;
-		border-radius: 10px;
-		margin: 20px;
+		top: 7%;
 		font-size: 25px;
+	}
+
+	#JournalPlacement{
+		position: fixed;
+		top: 25%;
+	}
+
+	p.journalText{
+		color: black;
+		background-color: #078686;
+		width: 90%;
+		border-radius: 10px;
+		padding: 10px;
+		box-shadow: 2px 2px 2px;
 	}
