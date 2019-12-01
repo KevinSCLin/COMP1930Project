@@ -1,8 +1,9 @@
 body, html {
     height: 100%;
     background-size: cover;
-    /* background-repeat:no-repeat; */
-    background: linear-gradient( to bottom ,rgb(238,249,249), rgb(97,241,241,1));
+    background-repeat:no-repeat;
+    background: linear-gradient(180deg, rgba(238, 249, 249, 0.99) 24.77%, rgba(215, 247, 247, 0.993002) 32.81%,
+    #A2F3F3 51.56%, #61F1F1 74.48%);
 }
 #text {
     position: fixed;
@@ -42,7 +43,7 @@ body, html {
 
     color: #000000;
 }
-#logoutbutton {
+#settings {
     position: absolute;
     left: 70.8%;
     right: 2.13%;
@@ -82,7 +83,7 @@ body, html {
     color: #000000;
 }
 
-#journals {
+#journals{
     position: absolute;
     left: 24.93%;
     right: 52%;
@@ -98,37 +99,6 @@ body, html {
     align-items: center;
     text-align: center;
     letter-spacing: -0.333333px;
-    color: #000000;
-}
-.Goals {
-    position: absolute;
-    width: 70%;
-    height: 5.96%;
-    left: 0px;
-    border-radius: 25px;
 
     color: #000000;
-} 
-.Goals{
-    position: fixed;
-    width: 70.4%;
-    height: 5.96%;
-    left: 0px;
-    top: 22.8%;
-
-
-
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 20px;
-    line-height: 23px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    letter-spacing: -0.333333px;
-
-    color: #000000;
-
-    background: #57DFDF;
 }

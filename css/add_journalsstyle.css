@@ -43,7 +43,7 @@ body, html {
 
     color: #000000;
 }
-#settings {
+#logoutbutton {
     position: absolute;
     left: 70.8%;
     right: 2.13%;
@@ -101,7 +101,7 @@ body, html {
     letter-spacing: -0.333333px;
 
     color: #000000;
-} 
+}
 
 #submitJournal{
     background-color: aqua;
