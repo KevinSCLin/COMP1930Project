@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/goals.css">
+    <link rel="stylesheet" href="css/subgoalsstyle.css">
     <link rel="stylesheet" href="css/navigationAndBackground.css">
     <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
@@ -24,7 +24,7 @@
         <a class="nav-item nav-link" id="logoutbutton" href="index.html">Log Out</a>
     </nav>
 
-    <h2 id="header">Add Subgoals</h2>
+    <h2 id="pageTitle">Add Subgoals</h2>
 
     <form id="goalform">
     <fieldset class="form-group">
@@ -52,6 +52,9 @@
     </div>
 
     <input type="submit" id="submitGoal">
+    <div id="errorMsgSection">
+        <p id="errorMsg"></p>
+    </div>
 
     <script>
         console.log("adding subgoals to:" + localStorage.getItem('newGoal'));
@@ -63,38 +66,47 @@
         
         //set up writing to database by clicking submit
         let index = localStorage.getItem("Index"); //index of subgoal #
-        console.log("index count is: " + index);
-        console.log("newGoal is: " + localStorage.getItem('newGoal'));
+        // console.log("index count is: " + index);
+        // console.log("newGoal is: " + localStorage.getItem('newGoal'));
 
         document.getElementById("goalform").addEventListener('submit', processForm);
         function processForm(e) {
             e.preventDefault()
-
             //take input from input fields and store in firestore
-
             let subgoalCollection = db.collection("Users").doc(user).collection("Goals").doc(localStorage.getItem('newGoal')).
             collection("Subgoals");
-            
-            subgoalCollection.doc("Subgoal" + 1).set({
-                name: document.getElementById("goalname1").value,
-                completed: false
-            });
-            subgoalCollection.doc("Subgoal" + 2).set({
-                name: document.getElementById("goalname2").value,
-                completed: false
-            });
-            subgoalCollection.doc("Subgoal" + 3).set({
-                name: document.getElementById("goalname3").value,
-                completed: false
-            });
-            subgoalCollection.doc("Subgoal" + 4).set({
-                name: document.getElementById("goalname4").value,
-                completed: false
-            });
-            subgoalCollection.doc("Subgoal" + 5).set({
-                name: document.getElementById("goalname5").value,
-                completed: false
-            })
+            if (subgoalBox2.value != "") {
+                subgoalCollection.doc("Subgoal" + 2).set({
+                    name: document.getElementById("goalname2").value,
+                    completed: false
+                });
+            }
+            if (subgoalBox3.value != "") {
+                subgoalCollection.doc("Subgoal" + 3).set({
+                    name: document.getElementById("goalname3").value,
+                    completed: false
+                });
+            }
+            if (subgoalBox4.value != "") {
+                subgoalCollection.doc("Subgoal" + 4).set({
+                    name: document.getElementById("goalname4").value,
+                    completed: false
+                });
+            }
+            if (subgoalBox5.value != "") {
+                subgoalCollection.doc("Subgoal" + 5).set({
+                    name: document.getElementById("goalname5").value,
+                    completed: false
+                });
+            }
+            // At least subgoal1 must be filled
+            if (subgoalBox1.value == "") {
+                document.getElementById("errorMsg").innerHTML = "Subgoal 1 must be entered";
+            } else {
+                subgoalCollection.doc("Subgoal" + 1).set({
+                    name: document.getElementById("goalname1").value,
+                    completed: false
+                })
                 .then(function () {
                     //increase index for next goal and set it in local memory
                     index++;
@@ -103,12 +115,11 @@
                     window.location.href = "subgoalsuccessfullyadded.html"
                 })
                 .catch(function (error) {
-                    console.log("error")
+                    console.error("error ", error);
                 });
-
+            }
         };
-
-
+            
 
     </script>
 
