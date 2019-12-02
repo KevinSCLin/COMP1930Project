@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/navigationAndBackground.css">
     <link rel="stylesheet" href="css/subgoalsstyle.css">
     <link rel="stylesheet" href="css/navigationAndBackground.css">
     <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
@@ -26,47 +25,82 @@
       <a href="main.html"><button id="backbutton">Back</button></a>
     </div>
 
+    <form id="goalSummary">
+        <input type="submit" id="submitButton">
+    </form>
+
 <script>
     var query = decodeURI(window.location.search);
     var queries = query.split("?");
     var goalID = queries[1];
-    let ul = document.createElement("ul")
-    ul.className="list-group list-group-flush";
+    let subGoalCollection = db.collection("Users").doc(user).collection("Goals").doc(goalID).collection("Subgoals").get();
+    let complete = 0;
     function createListElements(doc) {
-
-        //create bootstrap list element
-        let li = document.createElement("li");
-        li.className="list-group-item";
 
         //create bootstrap div element and append it to list
         let div = document.createElement("div");
-        div.className ="custom-control custom-checkbox";
-        li.appendChild(div)
+        div.className ="checkbox";
+        
 
-        //create bootstrap input and label elements and append to div
-        let input = document.createElement("input");
-        input.type="checkbox";
-        input.className="custom-control-input";
-        input.id = doc.data().name;
+        //create bootstrap label element and append to div
         let label = document.createElement("label");
         label.className="custom-control-label";
-        label.for=input.id;
         label.innerHTML= doc.data().name;
-        div.appendChild(input)
-        div.appendChild(label)
+        div.appendChild(label);
+
+
+        //create bootstrap input elements and append to div
+        let input = document.createElement("input");
+        
+        input.type="checkbox";
+        input.value = "";
+        if (doc.data().completed === true) {
+            input.checked=true;
+        }
+        input.onclick= (function(){
+            if (input.checked){
+                complete++;
+            }
+            else{
+                complete--;
+            }
+            db.collection("Users").doc(user).collection("Goals").doc(goalID).collection("Subgoals").doc(doc.id).update({
+                completed: input.checked,
+            }).then(function() {
+                console.log("update")
+            })
+
+        })
+        input.id = doc.data().name;
+        label.appendChild(input);
+        div.appendChild(label);
+
+        document.getElementById("goalSummary").appendChild(div);
+
     }
-
-
-    document.body.appendChild(ul)
-    db.collection("Users").doc(user).collection("Goals").doc(goalID).collection("Subgoals").get().
-    then(function (querySnapshot){
+    let total = 0;
+    subGoalCollection.then(function (querySnapshot){
         querySnapshot.forEach(function(doc) {
             if (doc.data().name !== "") {
+                total ++;
                 createListElements(doc)
             }
         })
     })
+    document.getElementById("goalSummary").addEventListener('submit', processForm);
+    
+    function processForm(e) {
+        e.preventDefault()
+        subGoalCollection.then(function (querySnapshot){
+        querySnapshot.forEach(function(doc) {
+        db.collection("Users").doc(user).collection("Goals").doc(goalID).update({
+            completePercentage: complete/total
+        })
+        })
+        })
+    }
 
 </script>
+<script src="scripts/logoutFunction.js"></script>
 </body>
 </html>

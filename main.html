@@ -27,40 +27,49 @@
             <h1 id="text">Goals at a Glance</h1>
         </div>
         <script>
+        function createProgressBar(elem, percentage){
+                let div = document.createElement("div");
+                div.id = "myProgress";
+                let div2 = document.createElement("div");
+                div2.id="myBar"
+                div2.style.width=percentage + "%";
+                div.appendChild(div2);
+                elem.appendChild(div);
+            }   
             let index = 1;
             db.collection("Users").doc(user).collection("Goals").get().then(function(querySnapshot) {
                 querySnapshot.forEach(function(doc) {
                     // create div tag for each goal doc in data base
                     if (doc.data().completed !== true) {
-                        var div = document.createElement("div");
+                        let div = document.createElement("jumbotron")
+                        div.id= "Goal" + index
+                        let div1 = document.createElement("div");
                         div.className = "Goals";
-                        div.id = "Goal" + index;
-                        div.onclick = function() {
+                        div1.onclick = function() {
                             window.location.href = "goalsummarypage.html?" + div.id;
                         };
-                        //Create progress Bars
-                        // create progress percentage
-                        //create an anchor tag for each
-                        //create stylesheet for each div tag
-                        // var styleSheet = document.createElement("style");
-                        // styleSheet.innerHTML = "#Goal" + index + "{position:absolute; top: " + (22.8 + (15 * (index - 1))) + "%;}";
-                        // document.head.appendChild(styleSheet);
                         index++;
                         //create a text node based on the name saved in database
                         var para = document.createElement("p");
-                        var node = document.createTextNode(doc.data().name);
+                        var node = document.createTextNode(doc.data().name + ": ");
                         para.appendChild(node);
                         //if description is not undefined
-                        if (doc.data().description != undefined) {
-                            let goalDescriptionnode = document.createTextNode(doc.data().description);
-                            para.appendChild(goalDescriptionnode);
-                        }
+                        // if (doc.data().description != undefined) {
+                        //     let goalDescriptionnode = document.createTextNode(doc.data().description);
+                        //     para.appendChild(goalDescriptionnode);
+                        // }
                         //append created elements to html page
-                        div.appendChild(para);
-                        document.body.appendChild(div)
+                        div1.appendChild(para);
+                        div.appendChild(div1);
+                        document.body.appendChild(div);                        
+                        console.log(Math.round(doc.data().completePercentage * 100));
+                        createProgressBar(div, Math.round(doc.data().completePercentage * 100));
+                        
                     }
                 })
             })
+            
+
         </script>
 
 

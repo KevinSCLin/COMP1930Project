@@ -138,3 +138,13 @@ html {
     color: #000000;
     background: #57DFDF;
 } */
+
+#myProgress {
+    width: 100%;
+    background-color: grey;
+  }
+  
+  #myBar {
+    height: 30px;
+    background-color: blue;
+  }
