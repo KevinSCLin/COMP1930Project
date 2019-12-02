@@ -102,4 +102,17 @@ body, html {
 
 #pageTitle{
     position: relative;
+
+}
+
+#header {
+    color: #078686;
+    position: relative;
+    padding: 5px 5px 5px 5px;
+}
+
+#submitGoal {
+    position: absolute;
+    font-size: 2vh;
+
 }
