@@ -14,7 +14,7 @@ html {
     margin-right: auto;
 }
 
-#text {
+#text1 {
     position: fixed;
     width: 100%;
     height: 6.03%;
@@ -76,7 +76,7 @@ html {
     color: #000000;
 }
 
-#settings {
+#logoutbutton {
     position: absolute;
     left: 70.8%;
     right: 2.13%;
