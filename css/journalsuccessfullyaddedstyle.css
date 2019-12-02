@@ -114,11 +114,11 @@ body, html {
     align-items: center;
     text-align: left;
     letter-spacing: -0.333333px;
-
     color: #078686;
 }
 
 #saveSuccess {
     position: fixed;
     top: 10%;
+    color: #078686;
 }

@@ -78,7 +78,8 @@ body, html {
 	#title{
 		font-size:25px;
 		position: relative;
-		margin: 100px, 20px, 20px, 20px;
+		margin: 20px 20px;
+		color: #078686;
 	}
 	#instruction {
 		margin: 20px, 20px, 20px, 20px;
