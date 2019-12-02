@@ -44,13 +44,12 @@ body, html {
 
     color: #000000;
 }
-#settings {
+#logoutbutton {
     position: absolute;
     left: 70.8%;
     right: 2.13%;
     top: 1.75%;
     bottom: 3.51%;
-
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
@@ -60,7 +59,6 @@ body, html {
     align-items: center;
     text-align: center;
     letter-spacing: -0.333333px;
-
     color: #000000;
 }
 

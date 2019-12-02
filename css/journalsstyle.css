@@ -6,7 +6,7 @@ body, html {
 		 #A2F3F3 51.56%, #61F1F1 74.48%);
 		background-attachment: fixed;
 	}
-    #text {
+    /* #text {
 		position: fixed;
 		width: 53.6%;
 		height: 6.03%;
@@ -24,7 +24,7 @@ body, html {
 		letter-spacing: -0.333333px;
 
     	color: #078686;
-	}
+	} */
 	#goals {
 		position: absolute;
 		left: 50.6%;
@@ -70,7 +70,6 @@ body, html {
 		right: 78.13%;
 		top: 1.75%;
 		bottom: 0%;
-	
 		font-family: Roboto;
 		font-style: normal;
 		font-weight: normal;
@@ -80,7 +79,6 @@ body, html {
 		align-items: center;
 		text-align: center;
 		letter-spacing: -0.333333px;
-	
 		color: #000000;
 	}
 	
@@ -90,7 +88,6 @@ body, html {
 		right: 52%;
 		top: 0%;
 		bottom: 1.75%;
-	
 		font-family: Roboto;
 		font-style: normal;
 		font-weight: normal;
@@ -100,23 +97,25 @@ body, html {
 		align-items: center;
 		text-align: center;
 		letter-spacing: -0.333333px;
-	
 		color: #000000;
 	} 
-	#instruction {
-		color: #078686;
-		position: fixed;
-		left: 0px;
-		top: 17%;
-		font-family: Arial, Helvetica, sans-serif;
+
+	#logoutbutton {
+		position: absolute;
+		left: 70.8%;
+		right: 2.13%;
+		top: 1.75%;
+		bottom: 3.51%;
+		font-family: Roboto;
 		font-style: normal;
 		font-weight: normal;
 		font-size: 20px;
-		line-height: 29px;
+		line-height: 23px;
+		display: flex;
 		align-items: center;
-		text-align: left;
+		text-align: center;
 		letter-spacing: -0.333333px;
-    	color: #078686;
+		color: #000000;
 	}
 
 	#buttonPlacement {
@@ -129,13 +128,19 @@ body, html {
 		position: static;
 		height: 150px;
 		width: 240px;
-		display: inline-block;
+		display: block;
 		background-color: #8FD2D2;
 		box-shadow: 5px 5px 5px;
-		vertical-align: middle;
 		align-items:center;
 		justify-content: center;
 		border-radius: 10px;
-		margin: 20px;
+		margin: 30px 30px 30px 30px;
+		font-size: 25px;
+	}
+
+	#pageHeader {
+		position: relative;
+		margin: 20px 20px 20px 20px;
+		display: inline-block;
 		font-size: 25px;
 	}
