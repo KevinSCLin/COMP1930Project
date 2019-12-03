@@ -41,8 +41,8 @@
                 querySnapshot.forEach(function(doc) {
                     // create div tag for each goal doc in data base
                     if (doc.data().completed !== true) {
-                        let div = document.createElement("jumbotron")
-                        div.id= "Goal" + index
+                        let div = document.createElement("jumbotron");
+                        div.id= "Goal" + index;
                         let div1 = document.createElement("div");
                         div.className = "Goals";
                         div1.onclick = function() {

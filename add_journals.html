@@ -19,14 +19,14 @@
             <a class="nav-item nav-link" id="goals" href="goals.html">Goals</a>
             <a class="nav-item nav-link" id="logoutbutton" href="index.html">Log Out</a>
     </nav>
-    <h2 id="text"></h2>
+    <h1 id="text"></h1>
     
     <br><br><br>
     <div class="form-group">
         <label for="journalBox">Please enter your journal for this goal below:</label>
         <textarea class="form-control" id="journalValue" rows="12"></textarea>
     </div>
-    <button id="submitJournal">Save</button>
+    <button class="smallerButtons">Save</button>
     <div id="errorDiv">
         <p id="errorMessage"></p>
     </div>
@@ -49,8 +49,8 @@
             querySnapshot.forEach(function(doc) {
                 journalArr.push(doc.id);
                 console.log(doc.id);
-            })
-            index = journalArr.length
+            });
+            index = journalArr.length;
             console.log(journalArr);
             console.log("current journal doc count is " + index);
         });
