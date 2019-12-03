@@ -8,7 +8,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/mainstyle.css">
-    <link rel="stylesheet" href="css/navigationAndBackground.css">
+    <link rel="stylesheet" href="css/global.css">
     <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
     <script src="scripts/app.js">
@@ -23,15 +23,15 @@
             <a class="nav-item nav-link" id="goals" href="goals.html">Goals</a>
             <a class="nav-item nav-link" id="logoutbutton" href="index.html">Log Out</a>
         </nav>
-        <div class="container">
-            <h1 id="text">Goals at a Glance</h1>
+        <div class="header">
+            <h1 class="pageHeader">Goals at a Glance</h1>
         </div>
         <script>
         function createProgressBar(elem, percentage){
                 let div = document.createElement("div");
                 div.id = "myProgress";
                 let div2 = document.createElement("div");
-                div2.id="myBar"
+                div2.id="myBar";
                 div2.style.width=percentage + "%";
                 div.appendChild(div2);
                 elem.appendChild(div);
