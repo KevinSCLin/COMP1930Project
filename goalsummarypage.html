@@ -109,12 +109,12 @@
 
     function processForm(e) {
 
-        e.preventDefault()
-        subGoalCollection.then(function (querySnapshot){
-            querySnapshot.forEach(function(doc) {
+        e.preventDefault();
+        subGoalCollection.then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
                 db.collection("Users").doc(user).collection("Goals").doc(goalID).update({
-                    completePercentage: complete/total
-
+                    completePercentage: Math.round(completed / total * 100),
+                    completedSubgoals: completed,
                 })
             })
         })
