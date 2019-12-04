@@ -7,7 +7,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/goals.css">
-  <link rel="stylesheet" href="css/navigationAndBackground.css">
+  <link rel="stylesheet" href="css/global.css">
   <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
   <script src="scripts/app.js"></script>
@@ -19,8 +19,8 @@
     <a class="nav-item nav-link" id=journals href="journals.html">Journals</a>
     <a class="nav-item nav-link" id="goals" href="goals.html">Goals</a>
     <a class="nav-item nav-link" id="logoutbutton" href="index.html">Log Out</a>
-  </nav>  
-    <h2 id="header">Add goals</h2>
+  </nav>
+    <h1 class="pageHeader">Add goals</h1>
     <form id="goalform">
     <fieldset class="form-group">
     <div class="form-group">
@@ -48,7 +48,7 @@
       <option value="medium">Medium</option>
       <option value="low">Low</option>
       </select>
-      <input type="submit" id="submitGoal">
+      <input type="submit" class="smallerButtons">
     </div>
     </fieldset>
     </form>

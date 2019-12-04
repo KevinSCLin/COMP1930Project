@@ -1,0 +1,49 @@
+body, html {
+    height: 100%;
+    background-size: cover;
+    background: linear-gradient(180deg, rgba(238, 249, 249, 0.99) 24.77%, rgba(215, 247, 247, 0.993002) 32.81%,
+    #A2F3F3 51.56%, #61F1F1 74.48%) no-repeat fixed;
+}
+
+.pageHeader {
+    position: relative;
+    margin: 20px 20px 20px 20px;
+    display: inline-block;
+    color: #078686;
+    font-size: 4vh;
+
+}
+#home, #journals, #goals, #logoutbutton {
+    font-family: Roboto, sans-serif;
+    font-weight: bold;
+    color: #078686;
+    font-size: 2vh;
+}
+
+#text {
+    position: fixed;
+    width: 53.6%;
+    height: 6.03%;
+    left: 0px;
+    top: 9.5%;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 25px;
+    line-height: 29px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.333333px;
+
+    color: #078686;
+}
+
+.smallerButtons {
+    background-color: aqua;
+    border-radius: 4px;
+    display: inline-block;
+    width: 50vw;
+    height: 40px;
+    font-size: 20px;
+}

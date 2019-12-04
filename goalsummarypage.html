@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/goals.css">
-    <link rel="stylesheet" href="css/navigationAndBackground.css">
+    <link rel="stylesheet" href="css/goalsummarystyle.css">
+    <link rel="stylesheet" href="css/global.css">
     <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
     <script src="scripts/app.js"> var db=firebase.firestore();</script>
@@ -21,12 +21,16 @@
         <a class="nav-item nav-link" id="logoutbutton" href="index.html">Log Out</a>
     </nav>
     
+    <h2 id="goalTitle" class="pageHeader"></h2>
+    <h3 id="goalDescription" class="text"></h3>
+
+
     <div class="container">
       <a href="main.html"><button id="backbutton">Back</button></a>
     </div>
 
     <form id="goalSummary">
-        <input type="submit" id="submitButton">
+        <input type="submit" class="smallerButtons">
     </form>
 
 <script>
@@ -34,8 +38,22 @@
     var queries = query.split("?");
     var goalID = queries[1];
     let subGoalCollection = db.collection("Users").doc(user).collection("Goals").doc(goalID).collection("Subgoals").get();
+<<<<<<< HEAD
     let completed = 0;
     let buttonIndex= 0
+=======
+    let goalDoc = db.collection("Users").doc(user).collection("Goals").doc(goalID);
+    let goalDescription = ""
+    let complete = 0;
+    //Add goal name to page header
+    document.getElementById("goalTitle").innerHTML = goalID;
+
+    //Get goal description
+    goalDoc.get().then(function(doc){if (doc.exists){goalDescription = doc.data()["description"];}})
+    console.log(goalDescription);
+    document.getElementById("goalDescription").innerHTML = goalDescription;
+
+>>>>>>> bf2f7f9e56c66fd0de7733d4aa0ca5932e906cb1
     function createListElements(doc) {
 
         //create bootstrap div element and append it to list
@@ -45,8 +63,8 @@
 
         //create bootstrap label element and append to div
         let label = document.createElement("label");
-        label.className="custom-control-label";
-        label.innerHTML= doc.data().name;
+        label.className="subgoalLabel";
+        label.innerHTML= doc.data().name + "   ";
         div.appendChild(label);
 
 
@@ -55,6 +73,7 @@
         input.type="checkbox";
         input.id = "input" + buttonIndex;
         input.value = "";
+        input.setAttribute("class", "subgoalCheckbox");
         if (doc.data().completed === true) {
             input.checked=true;
         }
@@ -72,7 +91,7 @@
             })
         });
         input.id = doc.data().name;
-        label.appendChild(input);
+        div.appendChild(input);
         div.appendChild(label);
 
         document.getElementById("goalSummary").appendChild(div);
@@ -93,12 +112,20 @@
     document.getElementById("goalSummary").addEventListener('submit', processForm);
 
     function processForm(e) {
+<<<<<<< HEAD
         e.preventDefault();
         subGoalCollection.then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
                 db.collection("Users").doc(user).collection("Goals").doc(goalID).update({
                     completePercentage: Math.round(completed / total * 100),
                     completedSubgoals: completed,
+=======
+        e.preventDefault()
+        subGoalCollection.then(function (querySnapshot){
+            querySnapshot.forEach(function(doc) {
+                db.collection("Users").doc(user).collection("Goals").doc(goalID).update({
+                    completePercentage: complete/total
+>>>>>>> bf2f7f9e56c66fd0de7733d4aa0ca5932e906cb1
                 })
             })
         })
