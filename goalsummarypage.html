@@ -34,7 +34,8 @@
     var queries = query.split("?");
     var goalID = queries[1];
     let subGoalCollection = db.collection("Users").doc(user).collection("Goals").doc(goalID).collection("Subgoals").get();
-    let complete = 0;
+    let completed = 0;
+    let buttonIndex= 0
     function createListElements(doc) {
 
         //create bootstrap div element and append it to list
@@ -51,26 +52,25 @@
 
         //create bootstrap input elements and append to div
         let input = document.createElement("input");
-        
         input.type="checkbox";
+        input.id = "input" + buttonIndex;
         input.value = "";
         if (doc.data().completed === true) {
             input.checked=true;
         }
         input.onclick= (function(){
             if (input.checked){
-                complete++;
+                completed ++;
             }
             else{
-                complete--;
+               completed --;
             }
             db.collection("Users").doc(user).collection("Goals").doc(goalID).collection("Subgoals").doc(doc.id).update({
                 completed: input.checked,
             }).then(function() {
                 console.log("update")
             })
-
-        })
+        });
         input.id = doc.data().name;
         label.appendChild(input);
         div.appendChild(label);
@@ -82,21 +82,25 @@
     subGoalCollection.then(function (querySnapshot){
         querySnapshot.forEach(function(doc) {
             if (doc.data().name !== "") {
+                if (doc.data().completed) {
+                    completed ++;
+                }
                 total ++;
                 createListElements(doc)
             }
         })
-    })
+    });
     document.getElementById("goalSummary").addEventListener('submit', processForm);
-    
+
     function processForm(e) {
-        e.preventDefault()
-        subGoalCollection.then(function (querySnapshot){
-        querySnapshot.forEach(function(doc) {
-        db.collection("Users").doc(user).collection("Goals").doc(goalID).update({
-            completePercentage: complete/total
-        })
-        })
+        e.preventDefault();
+        subGoalCollection.then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+                db.collection("Users").doc(user).collection("Goals").doc(goalID).update({
+                    completePercentage: Math.round(completed / total * 100),
+                    completedSubgoals: completed,
+                })
+            })
         })
     }
 

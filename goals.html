@@ -53,7 +53,7 @@
     </fieldset>
     </form>
 
-    
+
     <script>
       //Kevin's codes
       //Getting existing goals into an array to get index id for next goal
@@ -62,28 +62,24 @@
       goalDoc.get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {   //for each element in querySnapshot, execute the anonymous function
           existingGoals.push(doc.id); //getting doc id of each goal
-          
+
           console.log(doc.id);
         });
-        console.log("existing goals count is: " + existingGoals.length);
       });
-
       document.getElementById("goalform").addEventListener('submit',processForm);
       function processForm(e){
         e.preventDefault();
         //take input from input fields and store in firestore
         let index = existingGoals.length + 1; //index of current goal number
-        console.log(index, " is index count");
         localStorage.setItem('newGoal', 'Goal' + index);
         goalDoc.doc("Goal" + index).set({
             name: document.getElementById("goalname").value, // goal name
             deadline: document.getElementById("deadline").value,
             priority: document.getElementById("priority").value,
             description: document.getElementById("goalDescription").value,
-            subgoals: 0,
-            completedSubgoals: 0,
             complete:false,
             completePercentage: 0,
+            completedSubgoals: 0,
           })
           .then(function () {
             //increase index for next goal and set it in local memory

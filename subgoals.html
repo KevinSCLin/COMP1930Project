@@ -71,7 +71,7 @@
 
         document.getElementById("goalform").addEventListener('submit', processForm);
         function processForm(e) {
-            e.preventDefault()
+            e.preventDefault();
             //take input from input fields and store in firestore
             let subgoalCollection = db.collection("Users").doc(user).collection("Goals").doc(localStorage.getItem('newGoal')).
             collection("Subgoals");
@@ -105,7 +105,7 @@
             } else {
                 subgoalCollection.doc("Subgoal" + 1).set({
                     name: document.getElementById("goalname1").value,
-                    completed: false
+                    completed: false,
                 })
                 .then(function () {
                     //increase index for next goal and set it in local memory

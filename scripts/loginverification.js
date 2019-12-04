@@ -1,8 +1,7 @@
 var user = localStorage.getItem('userName');
-if (user){
-  
-}
-else {
-  window.location.href="redirect.html";
+if (user) {
+
+} else {
+    window.location.href = "redirect.html";
 }
 

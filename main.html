@@ -11,9 +11,8 @@
     <link rel="stylesheet" href="css/navigationAndBackground.css">
     <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
-    <script src="scripts/app.js">
-        var db = firebase.firestore();
-    </script>
+    <script src="scripts/app.js"></script>
+
     <script src="scripts/loginverification.js"></script>
 
     <body>
@@ -27,51 +26,56 @@
             <h1 id="text">Goals at a Glance</h1>
         </div>
         <script>
-        function createProgressBar(elem, percentage){
+            let index = 1;
+            let existingGoals = [];
+            function createProgressBar(elem, percentage){
                 let div = document.createElement("div");
                 div.id = "myProgress";
                 let div2 = document.createElement("div");
-                div2.id="myBar"
+                div2.id="myBar";
                 div2.style.width=percentage + "%";
                 div.appendChild(div2);
                 elem.appendChild(div);
-            }   
-            let index = 1;
-            db.collection("Users").doc(user).collection("Goals").get().then(function(querySnapshot) {
-                querySnapshot.forEach(function(doc) {
-                    // create div tag for each goal doc in data base
-                    if (doc.data().completed !== true) {
-                        let div = document.createElement("jumbotron")
-                        div.id= "Goal" + index
-                        let div1 = document.createElement("div");
-                        div.className = "Goals";
-                        div1.onclick = function() {
-                            window.location.href = "goalsummarypage.html?" + div.id;
-                        };
-                        index++;
-                        //create a text node based on the name saved in database
-                        var para = document.createElement("p");
-                        var node = document.createTextNode(doc.data().name + ": ");
-                        para.appendChild(node);
-                        //if description is not undefined
-                        // if (doc.data().description != undefined) {
-                        //     let goalDescriptionnode = document.createTextNode(doc.data().description);
-                        //     para.appendChild(goalDescriptionnode);
-                        // }
-                        //append created elements to html page
-                        div1.appendChild(para);
-                        div.appendChild(div1);
-                        document.body.appendChild(div);                        
-                        console.log(Math.round(doc.data().completePercentage * 100));
-                        createProgressBar(div, Math.round(doc.data().completePercentage * 100));
-                        
-                    }
+            }
+            function createDiv(doc, index){
+                let div = document.createElement("jumbotron");
+                div.id= "Goal" + index;
+                let div1 = document.createElement("div");
+                div.className = "Goals";
+                div1.onclick = function() {
+                    window.location.href = "goalsummarypage.html?" + div.id;
+                };
+                div1.innerHTML = doc.data().name + " is " + String(doc.data().completePercentage) + "% complete";
+                div.appendChild(div1);
+                document.body.appendChild(div)
+                createProgressBar(div, doc.data().completePercentage);
+            }
+
+            function createGoalBoxes() {
+                db.collection("Users").doc(user).collection("Goals").get().then(function(querySnapshot) {
+                    querySnapshot.forEach(function(doc) {
+                        if (doc.data().completed !== true) {
+                            existingGoals.push(doc);
+                            createDiv(doc, index);
+                            index++;
+                        }
+                    })
+                }).then(function() {
+                    if (existingGoals.length === 0 ) {
+                        displayHelpfulMessage()
+                }
                 })
-            })
-            
+            }
+
+            function displayHelpfulMessage(){
+                let helpMessage = document.createElement("div");
+                helpMessage.id = "helpMessage";
+                helpMessage.className = "container";
+                helpMessage.innerHTML = "You currently have no uncompleted goals please add some on the add goal page";
+                document.body.appendChild(helpMessage);
+
+            }
+            createGoalBoxes();
 
         </script>
-
-
-
     </body>

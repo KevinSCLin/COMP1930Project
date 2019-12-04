@@ -1,9 +1,4 @@
 
-src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"
-
-
-src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js" 
-  
 // Your web app's Firebase configuration
 
     var firebaseConfig = {
@@ -17,7 +12,7 @@ src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"
     };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
-    var db = firebase.firestore();
+    let db = firebase.firestore();
 
     // db.collection("Users").doc("vkubliy").set({
     //     name: "Vlad",
