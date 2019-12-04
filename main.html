@@ -26,16 +26,16 @@
             <h1 class="pageHeader">Goals at a Glance</h1>
         </div>
         <script>
-            let index = 1;
+            let index = 0;
             let existingGoals = [];
             function createProgressBar(elem, percentage){
-                let div = document.createElement("div");
-                div.id = "myProgress";
-                let div2 = document.createElement("div");
-                div2.id="myBar";
-                div2.style.width=percentage + "%";
-                div.appendChild(div2);
-                elem.appendChild(div);
+                let progressBar1 = document.createElement("div");
+                progressBar1.id = "myProgress";
+                let progressBar2 = document.createElement("div");
+                progressBar2.id="myBar";
+                progressBar2.style.width=percentage + "%";
+                progressBar1.appendChild(progressBar2);
+                elem.appendChild(progressBar1);
 
             }
             function createDiv(doc, index){

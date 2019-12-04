@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/goalsummarystyle.css">
     <link rel="stylesheet" href="css/global.css">
     <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
@@ -41,7 +40,8 @@
 
     let goalDoc = db.collection("Users").doc(user).collection("Goals").doc(goalID);
     let goalDescription = ""
-    let complete = 0;
+    let completed = 0;
+    let buttonIndex=0;
     //Add goal name to page header
     document.getElementById("goalTitle").innerHTML = goalID;
 
