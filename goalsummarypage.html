@@ -38,10 +38,10 @@
     var queries = query.split("?");
     var goalID = queries[1];
     let subGoalCollection = db.collection("Users").doc(user).collection("Goals").doc(goalID).collection("Subgoals").get();
-<<<<<<< HEAD
+
     let completed = 0;
-    let buttonIndex= 0
-=======
+    let buttonIndex= 0;
+
     let goalDoc = db.collection("Users").doc(user).collection("Goals").doc(goalID);
     let goalDescription = ""
     let complete = 0;
@@ -53,7 +53,7 @@
     console.log(goalDescription);
     document.getElementById("goalDescription").innerHTML = goalDescription;
 
->>>>>>> bf2f7f9e56c66fd0de7733d4aa0ca5932e906cb1
+
     function createListElements(doc) {
 
         //create bootstrap div element and append it to list
@@ -112,20 +112,13 @@
     document.getElementById("goalSummary").addEventListener('submit', processForm);
 
     function processForm(e) {
-<<<<<<< HEAD
+
         e.preventDefault();
         subGoalCollection.then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
                 db.collection("Users").doc(user).collection("Goals").doc(goalID).update({
                     completePercentage: Math.round(completed / total * 100),
                     completedSubgoals: completed,
-=======
-        e.preventDefault()
-        subGoalCollection.then(function (querySnapshot){
-            querySnapshot.forEach(function(doc) {
-                db.collection("Users").doc(user).collection("Goals").doc(goalID).update({
-                    completePercentage: complete/total
->>>>>>> bf2f7f9e56c66fd0de7733d4aa0ca5932e906cb1
                 })
             })
         })

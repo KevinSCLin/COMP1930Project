@@ -36,7 +36,7 @@
                 div2.style.width=percentage + "%";
                 div.appendChild(div2);
                 elem.appendChild(div);
-<<<<<<< HEAD
+
             }
             function createDiv(doc, index){
                 let div = document.createElement("jumbotron");
@@ -48,45 +48,9 @@
                 };
                 div1.innerHTML = doc.data().name + " is " + String(doc.data().completePercentage) + "% complete";
                 div.appendChild(div1);
-                document.body.appendChild(div)
+                document.body.appendChild(div);
                 createProgressBar(div, doc.data().completePercentage);
             }
-=======
-            }   
-            let index = 1;
-            db.collection("Users").doc(user).collection("Goals").get().then(function(querySnapshot) {
-                querySnapshot.forEach(function(doc) {
-                    // create div tag for each goal doc in data base
-                    if (doc.data().completed !== true) {
-                        let div = document.createElement("jumbotron");
-                        div.id= "Goal" + index;
-                        let div1 = document.createElement("div");
-                        div.className = "Goals";
-                        div1.onclick = function() {
-                            window.location.href = "goalsummarypage.html?" + div.id;
-                        };
-                        index++;
-                        //create a text node based on the name saved in database
-                        var para = document.createElement("p");
-                        var node = document.createTextNode(doc.data().name + ": ");
-                        para.appendChild(node);
-                        //if description is not undefined
-                        // if (doc.data().description != undefined) {
-                        //     let goalDescriptionnode = document.createTextNode(doc.data().description);
-                        //     para.appendChild(goalDescriptionnode);
-                        // }
-                        //append created elements to html page
-                        div1.appendChild(para);
-                        div.appendChild(div1);
-                        document.body.appendChild(div);                        
-                        console.log(Math.round(doc.data().completePercentage * 100));
-                        createProgressBar(div, Math.round(doc.data().completePercentage * 100));
-                        
-                    }
-                })
-            })
-            
->>>>>>> bf2f7f9e56c66fd0de7733d4aa0ca5932e906cb1
 
             function createGoalBoxes() {
                 db.collection("Users").doc(user).collection("Goals").get().then(function(querySnapshot) {
