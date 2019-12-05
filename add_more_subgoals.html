@@ -1,0 +1,116 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add More Subgoals</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/global.css">
+    <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+    <script src="scripts/app.js"> var db=firebase.firestore();</script>
+    <script src="scripts/loginverification.js"></script>
+</head>
+<body>
+
+<nav class=navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar style="background-color: #63E2E2; height:7.12%">
+    <a class="nav-item nav-link active" id="home" href="main.html">Home</a>
+    <a class="nav-item nav-link" id=journals href="journals.html">Journals</a>
+    <a class="nav-item nav-link" id="goals" href="goals.html">Goals</a>
+    <a class="nav-item nav-link" id="logoutbutton" href="index.html">Log Out</a>
+</nav>
+
+<h1 class="pageHeader">Add More Subgoals</h1>
+<div id="subgoalDiv"></div>
+
+<div id="AddButton">
+    <button id="addMoreSubgoalSection">Add More Subgoal</button>
+    <button id="Save">Save Subgoals</button>
+    <p id="errorMessage"></p>
+</div>
+
+<script>
+let currentSubgoalCount = 0;
+var query = decodeURI(window.location.search);
+var queries = query.split("?");
+var goalID = queries[1];
+let newSubgoalCounter = 0;  //number of subgoals to be created
+let newSubgoalNum;
+let subGoalCollection = db.collection("Users").doc(user).collection("Goals").doc(goalID).collection("Subgoals").get();
+let subGoalColletionAddress = db.collection("Users").doc(user).collection("Goals").doc(goalID).collection("Subgoals");
+
+//Get current subgoal count by counting doc numbers in Subgoal collection
+subGoalCollection.then(function(querySnapshot) {
+    querySnapshot.forEach(function(doc) {   //for each element in querySnapshot, execute the anonymous function
+        currentSubgoalCount++;
+    });
+    newSubgoalNum = currentSubgoalCount + 1;
+    console.log("Current subgoal count is: "+ currentSubgoalCount);
+});
+
+//Subgoal box constructor
+function createSubgoalBox(subgoalIndex) {
+    //:param subgoalIndex: the next subgoal number
+    //:precondition: subgoalIndex must be an integer
+    let div = document.createElement("div");
+    div.setAttribute("class", "form-group");
+    
+    let label = document.createElement("label");
+    label.setAttribute("class", "form-control-label");
+    label.setAttribute("for", "goalname");
+    label.innerHTML = "Subgoal #" + subgoalIndex;
+
+    let input = document.createElement("input");
+    input.setAttribute("class", "form-control");
+    input.type = "text";
+    input.id = "subgoal" + subgoalIndex;
+    input.placeholder = "Your Subgoal";
+
+    this.createSubgoalItem = function() {
+        div.appendChild(label);
+        div.appendChild(input);
+        document.getElementById("subgoalDiv").appendChild(div);
+    }
+}
+
+//Onclick of Add More Subgoal button
+document.getElementById("addMoreSubgoalSection").onclick = function() {
+    let newSubgoalSection = new createSubgoalBox(newSubgoalNum);
+    newSubgoalSection.createSubgoalItem();
+    newSubgoalCounter++;
+    newSubgoalNum++;
+    console.log("Creating " + newSubgoalCounter + " new subgoals");
+}
+
+//Set new subgoals to firebase
+function saveSubgoals(){
+    //Make sure all boxes have values filled
+    let isfilled = false;
+    for (let i=0;i<newSubgoalCounter;i++) {
+        if (document.getElementById("subgoal" + (i + currentSubgoalCount + 1)).value == "") {
+            document.getElementById("errorMessage").innerHTML = "No subgoal field can be empty";
+            return;
+        }
+    }
+    isfilled = true;
+    if (isfilled == true) {
+        for (let i=0;i<newSubgoalCounter;i++) {
+            console.log("next subgoal to add is: " + "subgoal" + (i + currentSubgoalCount + 1));
+            subGoalColletionAddress.doc("Subgoal" + (i + currentSubgoalCount + 1)).set({
+                name: document.getElementById("subgoal" + (i + currentSubgoalCount + 1)).value,
+                completed: false
+            });
+        };
+        setTimeout(function(){  //pages move out too quickly, need to give a bit more time
+            window.location.href = "subgoalsuccessfullyadded.html";
+        }, 500);
+        
+    }
+
+};
+document.getElementById("Save").onclick = saveSubgoals;
+
+</script>
+
+</body>
+</html>
