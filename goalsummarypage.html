@@ -75,7 +75,9 @@
         input.onclick= (function(){
             db.collection("Users").doc(user).collection("Goals").doc(goalID).collection("Subgoals").doc(doc.id).update({
                 completed: input.checked,
+            
             }).then(function() {
+                window.location.href="goalsummarypage.html?"+ goalID;
                 console.log("update")
             })
             
@@ -105,9 +107,7 @@
             goalDoc.update({
                 totalSubgoals: total,
                 completedSubgoals: completed,
-            })
-            console.log("total is: " + total)            
-            console.log("completed is: " + completed)   
+            }) 
         });
            
     }
@@ -153,6 +153,8 @@
         document.getElementById("goalSummary").appendChild(anchor);
     }
 
+   
+
     // add event listener for submitting checkboxes
     document.getElementById("goalSummary").addEventListener('submit', processForm);
 
@@ -161,6 +163,7 @@
     function processForm(form) {
         form.preventDefault();
         updateTotals();
+        
         goalDoc.get().then(function (doc){
             if (doc.data().completedSubgoals !== doc.data().totalSubgoals) { 
                 console.log("updating incomplete")
@@ -183,6 +186,9 @@
                 })
             }
         })
+  
+       
+
         
     }
     
