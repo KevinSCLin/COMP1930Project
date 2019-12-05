@@ -94,20 +94,19 @@ body, html {
 		letter-spacing: -0.333333px;
 		color: #000000;
 	}
-
-	#title {
+	#headerAndSortButtons {
+		width: 100%;
 		position: relative;
-		margin: 100px 20px 20px 20px;
-		display: inline-block;
-		font-size: 25px;
+		margin: 50px 10px 10px 10px;
 	}
 
 	#JournalPlacement{
 		position: relative;
-		top: 25%;
+		display: block;
 	}
 
 	p.journalText{
+		position: relative;
 		color: black;
 		display: inline-block;
 		background-color: #57DFDF;
@@ -123,17 +122,18 @@ body, html {
 		margin:70px 20px 10px 0px;
 		font-size: 25px;
 		display: inline-block;
+		width: 100%;
 	}
 
 	#orderBy {
-		top: 15%;
 		position: relative;
 		display: inline-block;
 		margin: 10px 10px 10px 10px;
 		width: 80%;
+		white-space: nowrap;
 	}
 	#sortTitle {
-		position: relative;
+		position: inline;
 		font-size:20px;
 	}
 

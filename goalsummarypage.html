@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Goal Summary</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/global.css">
     <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
@@ -32,6 +32,9 @@
         <input type="submit" class="smallerButtons">
     </form>
 
+    <div class="container">
+        <input id="addSubgoalButton" type="button" value="Add Subgoal" name="moreSubgoal">
+    </div>
 <script>
     var query = decodeURI(window.location.search);
     var queries = query.split("?");
@@ -93,6 +96,7 @@
         document.getElementById("goalSummary").appendChild(div);
 
     }
+    //
     let total = 0;
     subGoalCollection.then(function (querySnapshot){
         querySnapshot.forEach(function(doc) {
@@ -105,6 +109,7 @@
             }
         })
     });
+    //Event Listener for clicking the Submit button
     document.getElementById("goalSummary").addEventListener('submit', processForm);
 
     function processForm(e) {
@@ -120,6 +125,11 @@
         })
     }
 
+    // Go to Add Subgoal page
+    document.getElementById("addSubgoalButton").onclick = GoToAddGoal;
+    function GoToAddGoal() {
+        window.location.href = "add_more_subgoals.html?" + goalID;
+    }
 </script>
 <script src="scripts/logoutFunction.js"></script>
 </body>
