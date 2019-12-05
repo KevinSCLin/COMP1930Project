@@ -143,12 +143,6 @@
         document.getElementById("goalSummary").appendChild(anchor);
     }
 
-    function hideForm(){
-        document.body.childNodes().forEach(function (element){
-            element.display="none";
-        })
-    }
-    
     // add event listener for submitting checkboxes
     document.getElementById("goalSummary").addEventListener('submit', processForm);
 
@@ -167,11 +161,13 @@
                     completePercentage: Math.round(doc.data().completedGoals / doc.data().totalSubgoals * 100),
                     complete: true,
                 }).then(function(){
-                    hideForm();
+                    let anchor = document.createElement("a");
+                    anchor.href="main.html";
                     let message = document.createElement("div");
                     message.className="Goals";
-                    message.innerHTML="Congratulations you have completed your goal";
-                    document.body.appendChild(message);
+                    message.innerHTML="Congratulations you have completed your goal. Click here to go back home.";
+                    anchor.appendChild(message)
+                    document.body.appendChild(anchor);
                 })
             }
         })  
