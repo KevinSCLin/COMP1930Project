@@ -22,7 +22,11 @@
             <a class="nav-item nav-link" id="goals" href="goals.html">Goals</a>
             <a class="nav-item nav-link" id="logoutbutton" href="index.html">Log Out</a>
         </nav>
-        <button onclick="window.location.href='edit_goal.html'">Change Goal Details</button>
+        <div class="container">
+            <a href="edit_goal.html"><button class="buttons">Change Goal Details</button></a>
+            <a href="pastGoals.html"></a><button class="buttons">Past Goals</button></a>
+        </div>
+        
         <div class="header">
             <h1 class="pageHeader">Goals at a Glance</h1>
         </div>
@@ -41,9 +45,9 @@
             }
             function createDiv(doc, index){
                 let div = document.createElement("jumbotron");
-                div.id= "Goal" + index;
+                div.id= doc.id + index
                 let anchor = document.createElement("a");
-                anchor.href= "goalsummarypage.html?" + div.id;
+                anchor.href= "goalsummarypage.html?" + doc.id;
                 let div1 = document.createElement("div");
                 div.className = "Goals";
                 div1.innerHTML = doc.data().name + " is " + String(doc.data().completePercentage) + "% complete";
@@ -59,12 +63,11 @@
                         if (doc.data().complete !== true) {
                             existingGoals.push(doc);
                             createDiv(doc, index);
-                            index++;
                         }
-                        else {
-                            index++
-                        }
+                    
                     })
+                    index++;
+                    
                 }).then(function() {
                     if (existingGoals.length === 0 ) {
                         let anchor  = document.createElement("a");
@@ -75,6 +78,7 @@
                         document.body.appendChild(anchor);
                 }
                 })
+                
             }
 
             

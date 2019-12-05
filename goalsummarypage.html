@@ -22,6 +22,8 @@
     </nav>
     
     <h2 id="goalTitle" class="pageHeader"></h2>
+    <h3 id="deadline" class="text"></h3>
+    <h3 id="priority" class="text"></h3>
     <h3 id="goalDescription" class="text"></h3>
 
     <form id="goalSummary" class="checkboxes">
@@ -37,6 +39,8 @@
     goalDoc.get().then(function(doc){
         document.getElementById("goalTitle").innerHTML = doc.data().name;
         document.getElementById("goalDescription").innerHTML = doc.data().description;
+        document.getElementById("deadline").innerHTML="This goal is due on " + doc.data().deadline;
+        document.getElementById("priority").innerHTML="This goal is a " + doc.data().priority + " priority";
     })
     
     let buttonIndex=0;
@@ -74,6 +78,7 @@
             }).then(function() {
                 console.log("update")
             })
+            
         });
          
         //update database on subgoal status based on whether or nor checkbox is checked
@@ -84,9 +89,10 @@
 
         document.getElementById("goalSummary").appendChild(div);
     }  
+    
     function updateTotals(){
         let total = 0;
-        let completed = 0
+        let completed = 0;
         subGoalCollection.then(function(subgoals){
             subgoals.forEach(function(doc) {
                 if (doc.data().name !== "") {
@@ -100,7 +106,10 @@
                 totalSubgoals: total,
                 completedSubgoals: completed,
             })
-        });	    
+            console.log("total is: " + total)            
+            console.log("completed is: " + completed)   
+        });
+           
     }
     function populateForm(){
         subGoalCollection.then(function (subgoals){
@@ -149,14 +158,16 @@
 
     //process form on submit
     function processForm(form) {
-        updateTotals();
         form.preventDefault();
+        updateTotals();
         goalDoc.get().then(function (doc){
-            if (doc.data().completedSubgoals !== doc.data().totalSubgoals) {
+            if (doc.data().completedSubgoals !== doc.data().totalSubgoals) { 
+                console.log("updating incomplete")
                 goalDoc.update({
                     completePercentage: Math.round(doc.data().completedSubgoals / doc.data().totalSubgoals * 100),
                 })
             } else {
+                console.log("updating complete")
                 goalDoc.update({
                     completePercentage: Math.round(doc.data().completedGoals / doc.data().totalSubgoals * 100),
                     complete: true,
@@ -170,7 +181,8 @@
                     document.body.appendChild(anchor);
                 })
             }
-        })  
+        })
+        
     }
     
 
