@@ -23,21 +23,9 @@
     <h2 id="goalTitle" class="pageHeader"></h2>
     <h3 id="goalDescription" class="text"></h3>
 
-
-    <div class="container">
-      <a href="main.html"><button  id="backbutton">Back</button></a>
-    </div>
-
     <form id="goalSummary" class="container">
     </form>
-<<<<<<< HEAD
     <script src="scripts/loginverification.js"></script>
-=======
-
-    <div class="container">
-        <input id="addSubgoalButton" type="button" value="Add Subgoal" name="moreSubgoal">
-    </div>
->>>>>>> fa4118caffc59dbd5c1252296f57a6e0b2d21bd7
 <script>
 
     let query = decodeURI(window.location.search);
@@ -106,7 +94,14 @@
                 createListElements(doc);
             })
     }).then(function(){
-        let submit = document.createElement
+        let submit = document.createElement("input")
+        submit.type="submit"
+        document.getElementById("goalSummary").appendChild(submit);
+        let back = document.createElement("button")
+        back.className="button"
+        back.innerHTML = "Back";
+        document.getElementById("goalSummary").appendChild(back);
+
     })
     subGoalCollection.then(function(subgoals){
         subgoals.forEach(function(doc) {
