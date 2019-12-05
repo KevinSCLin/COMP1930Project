@@ -1,0 +1,76 @@
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/editgoalstyle.css">
+        <link rel="stylesheet" href="css/global.css">
+        <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+        <script src="scripts/app.js"></script>
+        <title>Edit Goal</title>
+        <script src="scripts/loginverification.js"></script>
+</head>
+<body>
+        <nav class=navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar style="background-color: #63E2E2; height:7.12%">
+            <a class="nav-item nav-link active" id="home" href="main.html">Home</a>
+            <a class="nav-item nav-link" id=journals href="journals.html">Journals</a>
+            <a class="nav-item nav-link" id="goals" href="goals.html">Goals</a>
+            <a class="nav-item nav-link" id="logoutbutton" href="index.html">Log Out</a>
+        </nav>
+    <div class="header">
+            <h1 class="pageHeader">Edit Goal</h1>
+            <h2 id="description">Click on a goal to edit its details</h2>
+    </div>
+    <script>
+        let index = 1;
+        let existingGoals = [];
+        function createProgressBar(elem, percentage){
+            let progressBar1 = document.createElement("div");
+            progressBar1.id = "myProgress";
+            let progressBar2 = document.createElement("div");
+            progressBar2.id="myBar";
+            progressBar2.style.width=percentage + "%";
+            progressBar1.appendChild(progressBar2);
+            elem.appendChild(progressBar1);
+
+        }
+        function createDiv(doc, index){
+            let div = document.createElement("jumbotron");
+            div.id= "Goal" + index;
+            let anchor = document.createElement("a");
+            anchor.href= "edit_target_goal.html?" + div.id + "?" + doc.data().name;
+            let div1 = document.createElement("div");
+            div.className = "Goals";
+            div1.innerHTML = doc.data().name;
+            div.appendChild(div1);
+            anchor.appendChild(div)
+            document.body.appendChild(anchor);
+        }
+        //Create Buttons for all
+        function createGoalBoxes() {
+            db.collection("Users").doc(user).collection("Goals").get().then(function(querySnapshot) {
+                querySnapshot.forEach(function(doc) {
+                    if (doc.data().complete !== true) {
+                        existingGoals.push(doc);
+                        createDiv(doc, index);
+                        index++;
+                    }
+                })
+            }).then(function() {
+                if (existingGoals.length === 0 ) {
+                    let anchor  = document.createElement("a");
+                    anchor.href="goals.html";
+                    let message ="You currently have no uncompleted goals. Click here to add more."
+                    let messageBox = displayHelpfulMessage(message)
+                    anchor.appendChild(messageBox)
+                    document.body.appendChild(anchor);
+            }
+            })
+        }
+        createGoalBoxes();
+            </script>
+</body>
+</html>
