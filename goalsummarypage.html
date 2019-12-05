@@ -32,16 +32,21 @@
     let queries = query.split("?");
     let goalID = queries[1];
     let subGoalCollection = db.collection("Users").doc(user).collection("Goals").doc(goalID).collection("Subgoals").get();
-    let goalDoc = db.collection("Users").doc(user).collection("Goals").doc(goalID);
+    let goalDoc = db.collection("Users").doc(user).collection("Goals").doc(goalID).get();
+    goalDoc.then(function(doc){
+        document.getElementById("goalTitle").innerHTML = doc.data().name;
+        document.getElementById("goalDescription").innerHTML = doc.data().description;
+
+    })
     let completedGoals = 0;
     let buttonIndex=0;
     let totalSubgoals = 0;
     // //Add goal name to page header
-    // document.getElementById("goalTitle").innerHTML = goalID;
+    
 
     // //Get goal description
     // goalDoc.then(function(doc){
-    //     document.getElementById("goalDescription").innerHTML = goalDescription;
+    
     // })
     
 
@@ -94,15 +99,19 @@
                 createListElements(doc);
             })
     }).then(function(){
+        // add submit button to form
         let submit = document.createElement("input")
         submit.type="submit";
+        submit.className="buttons";
         document.getElementById("goalSummary").appendChild(submit);
-        let back = document.createElement("button");
-        back.className="button";
+        let back = document.createElement("input");
+        back.type="cancel";
+        back.className = "buttons"
+        back.id = "backButton"
         back.innerHTML = "Back";
         document.getElementById("goalSummary").appendChild(back);
         let addSubgoal = document.createElement("button");
-        addSubgoal.className = "button";
+        addSubgoal.className = "buttons";
         addSubgoal.innerHTML = "Add Subgoal";
         addSubgoal.onclick = GoToAddSubGoal;
         document.getElementById("goalSummary").appendChild(addSubgoal);
@@ -116,7 +125,11 @@
                 totalSubgoals ++;
             }
         })
+        
     })
+    function addButton(type){
+
+    }
           
   
     // add event listener for submitting checkboxes
@@ -134,12 +147,15 @@
                     })
                 }
             })
+            
+        })
+        if (completedGoals === totalSubgoals){
             document.getElementById("goalSummary").display="none";
             let message = document.createElement("div");
             message.className="Goals";
             message.innerHTML="Congratulations you have completed your goal";
             document.body.appendChild(message);
-        })  
+        }  
     }
     // Go to Add Subgoal page
     function GoToAddSubGoal() {
