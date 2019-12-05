@@ -134,9 +134,10 @@
     function addSubgoalButton(){
         let anchor =document.createElement("a");
         anchor.href="add_more_subgoals.html?" + goalID;
-        let addSubgoal = document.createElement("button");
+        let addSubgoal = document.createElement("p");
         addSubgoal.className = "buttons";
         addSubgoal.innerHTML = "Add Subgoal";
+        addSubgoal.id = "addSubgoalButton";
         anchor.appendChild(addSubgoal)
         document.getElementById("goalSummary").appendChild(anchor);
     }
@@ -144,7 +145,7 @@
     function addBackButton(){
         let anchor = document.createElement("a");
         anchor.href="main.html";
-        let back = document.createElement("button");
+        let back = document.createElement("p");
         back.className = "buttons"
         back.id = "backButton"
         back.innerHTML = "Back";
