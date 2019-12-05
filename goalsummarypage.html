@@ -7,6 +7,7 @@
     <title>Goal Summary</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/goalsummary.css">
     <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
     <script src="scripts/app.js"></script>
@@ -23,7 +24,7 @@
     <h2 id="goalTitle" class="pageHeader"></h2>
     <h3 id="goalDescription" class="text"></h3>
 
-    <form id="goalSummary" class="container">
+    <form id="goalSummary" class="checkboxes">
     </form>
     <script src="scripts/loginverification.js"></script>
 <script>
@@ -39,15 +40,6 @@
     })
     
     let buttonIndex=0;
-    
-    // //Add goal name to page header
-    
-
-    // //Get goal description
-    // goalDoc.then(function(doc){
-    
-    // })
-    
 
     function createListElements(doc) {
 
@@ -91,46 +83,66 @@
         div.appendChild(label);
 
         document.getElementById("goalSummary").appendChild(div);
-    }
-
+    }  
     function updateTotals(){
         let total = 0;
         let completed = 0
         subGoalCollection.then(function(subgoals){
-        subgoals.forEach(function(doc) {
-            if (doc.data().name !== "") {
-                if (doc.data().completed) {
-                    completed ++;
-                }
-                total ++;
-            }	            
-        })
-        goalDoc.update({
-            totalSubgoals: total,
-            completedSubgoals: completed,
-        })
-    });	    
+            subgoals.forEach(function(doc) {
+                if (doc.data().name !== "") {
+                    if (doc.data().completed) {
+                        completed ++;
+                    }
+                    total ++;
+                }	            
+            })
+            goalDoc.update({
+                totalSubgoals: total,
+                completedSubgoals: completed,
+            })
+        });	    
     }
     function populateForm(){
         subGoalCollection.then(function (subgoals){
-                subgoals.forEach(function (doc){
-                    createListElements(doc);
-                })
+            subgoals.forEach(function (doc){
+                createListElements(doc);
+            })
         }).then(function(){
-            // add submit button to form
-            addSubmitButton(document.getElementById("goalSummary"));
-        
+            addSubmitButton();
+            addSubgoalButton();
+            addBackButton();
         })
     }
-    populateForm()
-       
-    function addSubmitButton(elementToAddTo){
-        let submit = document.createElement("input");
-        submit.type= "submit";
+    populateForm();
+
+
+    function addSubmitButton(){
+        let submit = document.createElement("input")
+        submit.type="submit";
         submit.className="buttons";
-        submit.innerHTML = type;
-        elementToAddTo.appendChild(submit)
+        document.getElementById("goalSummary").appendChild(submit);
+    } 
+    function addSubgoalButton(){
+        let anchor =document.createElement("a");
+        anchor.href="add_more_subgoals.html?" + goalID;
+        let addSubgoal = document.createElement("button");
+        addSubgoal.className = "buttons";
+        addSubgoal.innerHTML = "Add Subgoal";
+        anchor.appendChild(addSubgoal)
+        document.getElementById("goalSummary").appendChild(anchor);
     }
+
+    function addBackButton(){
+        let anchor = document.createElement("a");
+        anchor.href="main.html";
+        let back = document.createElement("button");
+        back.className = "buttons"
+        back.id = "backButton"
+        back.innerHTML = "Back";
+        anchor.appendChild(back)
+        document.getElementById("goalSummary").appendChild(anchor);
+    }
+
     function hideForm(){
         document.body.childNodes().forEach(function (element){
             element.display="none";
@@ -164,15 +176,10 @@
             }
         })  
     }
-    // Go to Add Subgoal page
-    function GoToAddSubGoal() {
-        window.location.href = "add_more_subgoals.html?" + goalID;
-    }
+    
 
 </script>
 <script src="scripts/logoutFunction.js"></script>
 
-<a href="main.html"><div class="buttons">Back</div></a>
-<a href="add_more_subgoals.html?" + goalID;><div class="buttons">Add Subgoals</div></a>
 </body>
 </html>

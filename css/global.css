@@ -57,7 +57,7 @@ body, html {
 .buttons{
     position: relative;
     width: 10%;
-    height: 50%;
+    height: 7%;
     margin-top: 20px;
     font-family: Roboto;
     font-style: normal;
@@ -102,3 +102,21 @@ body, html {
     box-shadow: 2px 2px 2px;
     border: 2px solid black;
 }
+
+
+
+.button {
+    position: relative;
+    width: 50vw;
+    height: 50vh;
+    margin-top: 20px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    color: #FFFFFF;
+    background: #8FD2D2;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+
