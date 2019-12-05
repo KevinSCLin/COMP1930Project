@@ -1,0 +1,121 @@
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/editgoalstyle.css">
+        <link rel="stylesheet" href="css/global.css">
+        <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+        <script src="scripts/app.js"></script>
+        <title>Edit Goal</title>
+        <script src="scripts/loginverification.js"></script>
+</head>
+<html>
+    <nav class=navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar style="background-color: #63E2E2; height:7.12%">
+            <a class="nav-item nav-link active" id="home" href="main.html">Home</a>
+            <a class="nav-item nav-link" id=journals href="journals.html">Journals</a>
+            <a class="nav-item nav-link" id="goals" href="goals.html">Goals</a>
+            <a class="nav-item nav-link" id="logoutbutton" href="index.html">Log Out</a>
+    </nav>
+
+    <div class="header">
+            <h1 class="pageHeader", id="goalName"></h1>
+            <h2 id="description">Please update this goal's details in the boxes below</h2>
+    </div>
+    <div id="forms"></div>
+
+    <div class="form-group">
+            <label class="form-control-label" for="goalDescription">Goal Description</label>
+            <textarea class="form-control" id="goalDescription" rows="2"></textarea>
+    </div>
+
+    <div class="form-group">
+            <label class="form-control-label" for="deadline">Reset Deadline</label>
+            <input class="form-control" id="deadline" name="date" placeholder="MM/DD/YYYY" type="date"/>
+            </div>
+
+    <div class="form-group">
+            <label class="form-control-label" for="priority">Reset priority</label>
+            <select class="form-control" id="priority">
+            <option>Choose</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+            </select>
+    </div>
+    <button class="smallerButtons" id="saveButton">Save</button>
+
+    <script>
+        let query = decodeURI(window.location.search);
+        let queries = query.split("?");
+        let goalID = queries[1];
+        let goalName = queries[2];
+        document.getElementById("goalName").innerHTML = goalName;
+        let goalDoc = db.collection("Users").doc(user).collection("Goals").doc(goalID);
+        let currentDeadline = "";
+        let currentPriority = "";
+        let currentGoalDescription = "";
+        
+        //Can create a pre-filled form for goal name directly using goalName
+        let goalNameForm = new NewFilledForm("Goal Name", goalName, "goalNameBox");
+        goalNameForm.createFilledForm();
+
+        //Get data from Firebase to pre-fill the forms
+        goalDoc.get().then(function (doc) {
+            currentDeadline = doc.data().deadline,
+            currentPriority = doc.data().priority,
+            currentGoalDescription = doc.data().description;
+            console.log(currentGoalDescription, currentDeadline, currentPriority);
+            document.getElementById("goalDescription").value = currentGoalDescription;
+            document.getElementById("deadline").value = currentDeadline;
+            document.getElementById("priority").value = currentPriority;
+        })
+
+        function NewFilledForm(labelName, existingText, elementId) {
+            //:param labelName: the name of form label
+            //:precondition: labelName must be a string
+            //:param existingText: the existing data saved in Firebase
+            //:precondition: existingText must be the same type as saved in Firebase
+            //:param elementId: the element's id for the form to be generated
+            //:precondition: elementId must be a unique string without whitespace
+            let div = document.createElement("div");
+            div.setAttribute("class", "form-group");
+            
+            let label = document.createElement("label");
+            label.setAttribute("class", "form-control-label");
+            label.setAttribute("for", "goalNameBox");
+            label.innerHTML = labelName;
+
+            let input = document.createElement("input");
+            input.setAttribute("class", "form-control");
+            input.type = "text";
+            input.id = elementId;
+            input.value = existingText;
+
+            this.createFilledForm = function() {
+                div.appendChild(label);
+                div.appendChild(input);
+                document.getElementById("forms").appendChild(div);
+            }
+        }
+        
+        function updateToFirebase() {
+            console.log(document.getElementById("goalNameBox").value);
+            goalDoc.set({
+                name: document.getElementById("goalNameBox").value,
+                description: document.getElementById("goalDescription").value,
+                priority: document.getElementById("priority").value,
+                deadline: document.getElementById("deadline").value
+            }, {merge: true});
+            setInterval(function() {
+                window.location.href = "goalchangesuccessful.html";
+            }, 500);
+        }
+
+        document.getElementById("saveButton").onclick = updateToFirebase;
+
+    </script>
+</html>
