@@ -1,0 +1,45 @@
+.checkbox {
+    position: relative;
+
+}
+
+.subgoalCheckbox {
+    position: relative;
+    width: 2vw;
+    height: 2vh;
+}
+
+.subgoalLabel {
+    position: relative;
+    font-size: 24px;
+    margin-bottom: 3%;
+    margin-left: 1%;
+    color: #078686;
+}
+
+#goalDescription {
+    visibility: hidden;
+}
+
+.checkboxes {
+    position: relative;
+    margin-left: 2%;
+}
+
+@media only screen and (max-width: 600px) {
+    .checkboxes {
+        margin-left: 5%;
+    }
+
+    .subgoalCheckbox {
+        width: 6vw;
+        height: 6vh;
+
+    }
+
+    .subgoalLabel {
+        font-size: 22px;
+
+    }
+
+}

@@ -7,6 +7,7 @@
     <title>Goal Summary</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/goalsummary.css">
     <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
     <script src="scripts/app.js"></script>
@@ -23,7 +24,7 @@
     <h2 id="goalTitle" class="pageHeader"></h2>
     <h3 id="goalDescription" class="text"></h3>
 
-    <form id="goalSummary" class="container">
+    <form id="goalSummary" class="checkboxes">
     </form>
     <script src="scripts/loginverification.js"></script>
 <script>
@@ -106,7 +107,7 @@
         document.getElementById("goalSummary").appendChild(submit);
         let back = document.createElement("input");
         back.type="cancel";
-        back.className = "buttons"
+        // back.className = "buttons"
         back.id = "backButton"
         back.innerHTML = "Back";
         document.getElementById("goalSummary").appendChild(back);

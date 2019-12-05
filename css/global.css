@@ -45,19 +45,11 @@ body, html {
     color: #078686;
 }
 
-.smallerButtons {
-    background-color: aqua;
-    border-radius: 4px;
-    display: inline-block;
-    width: 50vw;
-    height: 40px;
-    font-size: 20px;
-}
 
 .buttons{
     position: relative;
     width: 10%;
-    height: 50%;
+    height: 10%;
     margin-top: 20px;
     font-family: Roboto;
     font-style: normal;
@@ -72,6 +64,7 @@ body, html {
 @media only screen and (max-width: 600px) {
     .buttons {
         width: 30%;
+        height: 10%;
     }
     #home, #goals, #journals {
         width: 10%;
@@ -102,3 +95,21 @@ body, html {
     box-shadow: 2px 2px 2px;
     border: 2px solid black;
 }
+
+
+
+.button {
+    position: relative;
+    width: 50vw;
+    height: 50vh;
+    margin-top: 20px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    color: #FFFFFF;
+    background: #8FD2D2;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+
