@@ -26,7 +26,7 @@
             <h1 class="pageHeader">Goals at a Glance</h1>
         </div>
         <script>
-            let index = 0;
+            let index = 1;
             let existingGoals = [];
             function createProgressBar(elem, percentage){
                 let progressBar1 = document.createElement("div");
@@ -41,21 +41,21 @@
             function createDiv(doc, index){
                 let div = document.createElement("jumbotron");
                 div.id= "Goal" + index;
+                let anchor = document.createElement("a");
+                anchor.href= "goalsummarypage.html?" + div.id;
                 let div1 = document.createElement("div");
                 div.className = "Goals";
-                div1.onclick = function() {
-                    window.location.href = "goalsummarypage.html?" + div.id;
-                };
                 div1.innerHTML = doc.data().name + " is " + String(doc.data().completePercentage) + "% complete";
                 div.appendChild(div1);
-                document.body.appendChild(div);
+                anchor.appendChild(div)
+                document.body.appendChild(anchor);
                 createProgressBar(div, doc.data().completePercentage);
             }
-
+            //Create Buttons for all
             function createGoalBoxes() {
                 db.collection("Users").doc(user).collection("Goals").get().then(function(querySnapshot) {
                     querySnapshot.forEach(function(doc) {
-                        if (doc.data().completed !== true) {
+                        if (doc.data().complete !== true) {
                             existingGoals.push(doc);
                             createDiv(doc, index);
                             index++;
@@ -63,19 +63,17 @@
                     })
                 }).then(function() {
                     if (existingGoals.length === 0 ) {
-                        displayHelpfulMessage()
+                        let anchor  = document.createElement("a");
+                        anchor.href="goals.html";
+                        let message ="You currently have no uncompleted goals. Click here to add more."
+                        let messageBox = displayHelpfulMessage(message)
+                        anchor.appendChild(messageBox)
+                        document.body.appendChild(anchor);
                 }
                 })
             }
 
-            function displayHelpfulMessage(){
-                let helpMessage = document.createElement("div");
-                helpMessage.id = "helpMessage";
-                helpMessage.className = "container";
-                helpMessage.innerHTML = "You currently have no uncompleted goals please add some on the add goal page";
-                document.body.appendChild(helpMessage);
-
-            }
+            
             createGoalBoxes();
 
         </script>
