@@ -18,7 +18,13 @@ body, html {
     font-weight: bold;
     color: #078686;
     font-size: 2vh;
+
 }
+
+#home:hover, #journals:hover, #goals:hover, #logoutbutton:hover {
+    background-color: #1b1e21;
+}
+
 
 #text {
     position: fixed;
@@ -49,9 +55,10 @@ body, html {
 }
 
 .buttons{
-    position: fixed;
-    width: 39.7%;
-    height: 6.52%;
+    position: relative;
+    width: 10%;
+    height: 50%;
+    margin-top: 20px;
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
@@ -60,6 +67,18 @@ body, html {
     background: #8FD2D2;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+    .buttons {
+        width: 30%;
+    }
+    #home, #goals, #journals {
+        width: 10%;
+    }
+    #logoutbutton {
+        width: 28%;
+    }
 }
 
 .Goals {
