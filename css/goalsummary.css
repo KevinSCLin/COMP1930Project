@@ -17,10 +17,6 @@
     color: #078686;
 }
 
-#goalDescription {
-    visibility: hidden;
-}
-
 .checkboxes {
     position: relative;
     margin-left: 2%;
