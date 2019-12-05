@@ -95,13 +95,17 @@
             })
     }).then(function(){
         let submit = document.createElement("input")
-        submit.type="submit"
+        submit.type="submit";
         document.getElementById("goalSummary").appendChild(submit);
-        let back = document.createElement("button")
-        back.className="button"
+        let back = document.createElement("button");
+        back.className="button";
         back.innerHTML = "Back";
         document.getElementById("goalSummary").appendChild(back);
-
+        let addSubgoal = document.createElement("button");
+        addSubgoal.className = "button";
+        addSubgoal.innerHTML = "Add Subgoal";
+        addSubgoal.onclick = GoToAddSubGoal;
+        document.getElementById("goalSummary").appendChild(addSubgoal);
     })
     subGoalCollection.then(function(subgoals){
         subgoals.forEach(function(doc) {
@@ -137,6 +141,11 @@
             document.body.appendChild(message);
         })  
     }
+    // Go to Add Subgoal page
+    function GoToAddSubGoal() {
+        window.location.href = "add_more_subgoals.html?" + goalID;
+    }
+
 </script>
 <script src="scripts/logoutFunction.js"></script>
 </body>
