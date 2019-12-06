@@ -32,14 +32,14 @@
     </div>
 
     <script>
-        // get goal docID
+        // global variables for query strings and Firebase paths
         let queryString = decodeURIComponent(window.location.search);
         let URLsplitArr = queryString.split("?");
         let docID = URLsplitArr[1];
         let goalName  = URLsplitArr[2];
         let journal = document.getElementById("journalValue");
         let goalDoc = db.collection("Users").doc(user).collection("Goals");
-        document.getElementById("text").innerHTML = goalName;
+        document.getElementById("text").innerHTML = goalName;  //update page header to goal name
 
         //Get current saved journal count
         let JournalDoc = db.collection("Users").doc(user).collection("Goals").doc(docID).collection("Journals");

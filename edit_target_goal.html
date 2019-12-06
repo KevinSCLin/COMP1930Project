@@ -49,6 +49,7 @@
     <button class="buttons" id="saveButton">Save</button>
 
     <script>
+        //Global variables for query strings, Firebase paths and variable innerHTMLs
         let query = decodeURI(window.location.search);
         let queries = query.split("?");
         let goalID = queries[1];
@@ -102,6 +103,7 @@
             }
         }
         
+        //Updating Firebase doc values
         function updateToFirebase() {
             console.log(document.getElementById("goalNameBox").value);
             goalDoc.set({
