@@ -22,15 +22,7 @@
             <a class="nav-item nav-link" id="goals" href="goals.html">Goals</a>
             <a class="nav-item nav-link" id="logoutbutton" href="index.html">Log Out</a>
         </nav>
-<!-- 
-        <div class="container">
-            <a href="edit_goal.html"><button class="buttons">Change Goal Details</button></a>
-            <a href="pastGoals.html"></a><button class="buttons">Past Goals</button></a>
-        </div> -->
         
-
-
-
         <div class="header">
             <h1 class="pageHeader">Goals at a Glance</h1>
             <button id="editGoalButton" onclick="window.location.href='edit_goal.html'">Change Goal Details</button>
@@ -38,30 +30,47 @@
         <script>
             let index = 1;
             let existingGoals = [];
+
+            //create progress bar for each goal box 
             function createProgressBar(elem, percentage){
+
+                //create first bar colour
                 let progressBar1 = document.createElement("div");
                 progressBar1.id = "myProgress";
+
+                //create second progress bar colour
                 let progressBar2 = document.createElement("div");
                 progressBar2.id="myBar";
                 progressBar2.style.width=percentage + "%";
+
+                //append bars to elem 
                 progressBar1.appendChild(progressBar2);
                 elem.appendChild(progressBar1);
 
             }
             function createDiv(doc, index){
+                
+                //create jumbotron to contain text and progress bar
                 let div = document.createElement("jumbotron");
                 div.id= doc.id + index
+
+                //create anchor element to link to goal summary page
                 let anchor = document.createElement("a");
                 anchor.href= "goalsummarypage.html?" + doc.id;
+
+                //create div for text of class name goals
                 let div1 = document.createElement("div");
                 div.className = "Goals";
                 div1.innerHTML = doc.data().name + " is " + String(doc.data().completePercentage) + "% complete";
+
+                //append elements to page
                 div.appendChild(div1);
                 anchor.appendChild(div)
                 document.body.appendChild(anchor);
                 createProgressBar(div, doc.data().completePercentage);
             }
-            //Create Buttons for all
+
+            //Create Buttons for all uncompleted goals
             function createGoalBoxes() {
                 db.collection("Users").doc(user).collection("Goals").get().then(function(querySnapshot) {
                     querySnapshot.forEach(function(doc) {
@@ -69,25 +78,20 @@
                             existingGoals.push(doc);
                             createDiv(doc, index);
                         }
-                    
                     })
                     index++;
-                    
                 }).then(function() {
                     if (existingGoals.length === 0 ) {
+                        //create informative box if the user has no goals
                         let anchor  = document.createElement("a");
                         anchor.href="goals.html";
                         let message ="You currently have no uncompleted goals. Click here to add more."
                         let messageBox = displayHelpfulMessage(message)
                         anchor.appendChild(messageBox)
                         document.body.appendChild(anchor);
-                }
-                })
-                
+                    }
+                })   
             }
-
-            
             createGoalBoxes();
-
         </script>
     </body>

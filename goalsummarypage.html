@@ -45,9 +45,13 @@
     
     let buttonIndex=0;
 
-    function createListElements(doc) {
+    function createInputElements(doc) {
+        /*create input elements based on the doc parameter
+          param: doc is firebase document reference
 
-        //create bootstrap div element and append it to list
+
+        */
+        //create bootstrap div element and append it to form
         let div = document.createElement("div");
         div.className ="checkbox";
         
@@ -72,19 +76,20 @@
             input.checked=true;
         }
 
+        //onclick checkboxes update the status of subgoal in firebase
         input.onclick= (function(){
+            //update firebase to checked status of checkbox
             db.collection("Users").doc(user).collection("Goals").doc(goalID).collection("Subgoals").doc(doc.id).update({
                 completed: input.checked,
             
             }).then(function() {
+                //refresh page to allow firebase to catch up
                 window.location.href="goalsummarypage.html?"+ goalID;
                 console.log("update")
             })
-            
         });
          
-        //update database on subgoal status based on whether or nor checkbox is checked
-            
+        //append input checkboxes and labels to form
         input.id = doc.data().name;
         div.appendChild(input);
         div.appendChild(label);
@@ -92,18 +97,29 @@
         document.getElementById("goalSummary").appendChild(div);
     }  
     
+    //uodate total goals and goals completed based on checked status
     function updateTotals(){
+        //Loops through the input elements and checks if checkboxes are checked, and updates firebase
+        //This function updates the firebase doc completed and total fields based on the amount of completed goals
         let total = 0;
         let completed = 0;
+
+        //for each subgoal in subgoal collection in the goal
         subGoalCollection.then(function(subgoals){
             subgoals.forEach(function(doc) {
+
+                //if checked increment completed
                 if (doc.data().name !== "") {
                     if (doc.data().completed) {
                         completed ++;
                     }
+
+                    //increment total in either case 
                     total ++;
                 }	            
             })
+
+            //update firebase with total and completed
             goalDoc.update({
                 totalSubgoals: total,
                 completedSubgoals: completed,
@@ -111,11 +127,16 @@
         });
            
     }
+    //populate form with buttons and list elements
     function populateForm(){
+        //Adds form elements to form 
+        //for each subgoal in subcollection create a input element
         subGoalCollection.then(function (subgoals){
             subgoals.forEach(function (doc){
                 createListElements(doc);
             })
+
+        //add buttons to form
         }).then(function(){
             addSubmitButton();
             addSubgoalButton();
@@ -124,14 +145,17 @@
     }
     populateForm();
 
-
+    //add goal submit button
     function addSubmitButton(){
         let submit = document.createElement("input")
         submit.type="submit";
         submit.className="buttons";
         document.getElementById("goalSummary").appendChild(submit);
     } 
-    function addSubgoalButton(){
+
+    //add subgoals box to form 
+    function addSubgoalBox(){
+        //add subgoal box to add to form
         let anchor =document.createElement("a");
         anchor.href="add_more_subgoals.html?" + goalID;
         let addSubgoal = document.createElement("p");
@@ -142,7 +166,9 @@
         document.getElementById("goalSummary").appendChild(anchor);
     }
 
+    //add back button to form
     function addBackButton(){
+        //add back button that links back home
         let anchor = document.createElement("a");
         anchor.href="main.html";
         let back = document.createElement("p");
@@ -161,21 +187,29 @@
 
     //process form on submit
     function processForm(form) {
+        //processes form by taking updated totals 
+        //parameters form is the input form 
         form.preventDefault();
         updateTotals();
         
+        //update completed percentage 
         goalDoc.get().then(function (doc){
+
+            //if goal not completed update percentage
             if (doc.data().completedSubgoals !== doc.data().totalSubgoals) { 
-                console.log("updating incomplete")
                 goalDoc.update({
                     completePercentage: Math.round(doc.data().completedSubgoals / doc.data().totalSubgoals * 100),
                 })
+
+            //if goal is completed update precentage and set complete to true
             } else {
-                console.log("updating complete")
+                
                 goalDoc.update({
                     completePercentage: Math.round(doc.data().completedGoals / doc.data().totalSubgoals * 100),
                     complete: true,
                 }).then(function(){
+
+                    //add congratulatory button that takes you back home
                     let anchor = document.createElement("a");
                     anchor.href="main.html";
                     let message = document.createElement("div");
@@ -186,13 +220,7 @@
                 })
             }
         })
-  
-       
-
-        
     }
-    
-
 </script>
 <script src="scripts/logoutFunction.js"></script>
 
