@@ -59,12 +59,12 @@
             .then(function(querySnapshot) {
                 journalArr = [];
                 dateArr = [];
-                querySnapshot.forEach(function(doc) {
+                querySnapshot.forEach(function(doc) {  //use querySnapshot to retrieve all journal texts and their dates
                     console.log(doc.id, " => ", doc.data());
                     journalArr.push(doc.data()["journalText"])
                     dateArr.push(doc.data()["date"]);
                 });
-                for (let i=0;i<journalArr.length;i++) {
+                for (let i=0;i<journalArr.length;i++) {  //Loop to create all journal items dynamically on page
                     let currentDate = new Date(dateArr[i]);
                     currentDate = currentDate.toString("MM/DD/YYYY")
                     let newJournal = new createJournalParagraphs(currentDate, journalArr[i]);
@@ -72,8 +72,9 @@
                 }
             })
             .catch(function(error) {
-                console.log("Error getting saved journals: ", error);
+                console.log("Error getting saved journals: ", error);  //if having error retrieving journals
             })
+            //Create journal paragraphs dynamically used by the loop above
             function createJournalParagraphs(date, text) {
                 let newParagraph = document.createElement("p");
                 newParagraph.setAttribute("class", "journalText");

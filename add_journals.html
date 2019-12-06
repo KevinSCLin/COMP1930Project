@@ -60,6 +60,7 @@
         goalDoc = db.collection("Users").doc(user).collection("Goals").doc(docID);
 
         //Save button function
+        //If save successful, go to journalsuccessfullyadded.html, else log error message
         saveButton.onclick = function() {
             if (journal.value != "") {
                 let journal = document.getElementById("journalValue").value;

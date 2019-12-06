@@ -106,7 +106,7 @@
         //Updating Firebase doc values
         function updateToFirebase() {
             console.log(document.getElementById("goalNameBox").value);
-            goalDoc.set({
+            goalDoc.set({ //adding data to Firebase's goal document
                 name: document.getElementById("goalNameBox").value,
                 description: document.getElementById("goalDescription").value,
                 priority: document.getElementById("priority").value,
@@ -116,7 +116,7 @@
                 window.location.href = "goalchangesuccessful.html";
             }, 500);
         }
-
+        //Save button updates Firebase data on click
         document.getElementById("saveButton").onclick = updateToFirebase;
 
     </script>

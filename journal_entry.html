@@ -69,7 +69,7 @@
       // Loop through all goal documents to find all journals
       for (i=0;i<documentID.length;i++) {
       let savedJournal = db.collection("Users").doc(user).collection("Goals").doc("Goalnull").collection("Journals").doc("entry1");
-          savedJournal.get().then(function(querySnapshot) {
+          savedJournal.get().then(function(querySnapshot) {  //querySnapshot to get all journal text fields
             querySnapshot.forEach(function(doc) {
               journalArr.push(doc.data().journalText);
               console.log(doc.data().journalText);

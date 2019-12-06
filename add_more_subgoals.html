@@ -79,7 +79,7 @@
     }
     //Set new subgoals to firebase
     function saveSubgoals(){
-        //Make sure all boxes have values filled
+        //Make sure all boxes have values filled, otherwise return undefined
         let isfilled = false;
         for (let i=0;i<newSubgoalCounter;i++) {
             if (document.getElementById("subgoal" + (i + currentSubgoalCount + 1)).value == "") {
@@ -88,6 +88,7 @@
             }
         }
         isfilled = true;
+        // Firebase set new values to goals doc and redirect in a half second
         if (isfilled == true) {
             for (let i=0;i<newSubgoalCounter;i++) {
                 console.log("next subgoal to add is: " + "subgoal" + (i + currentSubgoalCount + 1));
