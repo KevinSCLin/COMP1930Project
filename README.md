@@ -22,8 +22,9 @@ pastjournalsstyle.css
 settingsstyle.css  
 
 ========================================================================  
-scripts folder include Firebase API related javascript codes
-\scripts
+scripts folder include Firebase API related javascript codes  
+
+\scripts  
 app.js - Firebase API & project specific settings  
 goals.js - goals page specific javascript used in testing  
 loginverification.js - Firebase login API redirect  
