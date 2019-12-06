@@ -27,19 +27,23 @@
     <h3 id="instruction">Please tap a goal to add a journal</h3>
     <div id="buttonPlacement"></div>
     <script>
-          let documentID = [];
+
+      //global variables for array storage and db addresses
+      let documentID = [];
       let goalName = [];
       let journalDoc = db.collection("Users").doc(user).collection("Goals");
       journalDoc.get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {   //for each element in querySnapshot, execute the anonymous function
           documentID.push(doc.id);
           goalName.push(doc.data()["name"]);
-          //console.log(doc.id, " => ", doc.data());   //doc.id is the document name
         });
         generateAllButtons()  // Generate all buttons
       });
 
+      //Goal button constructor
       function createGoalButtonForJournal(docID, goalName) {
+        //:param docID: document name in Firebase
+        //:goalName: name field in docID
           let goalButton = document.createElement("button");
           goalButton.setAttribute("class", "goalButton");
           goalButton.innerHTML = goalName;
@@ -51,8 +55,8 @@
           }
       }
       
+      //Loop to generate all goal buttons
       function generateAllButtons() {
-          // Generate buttons with goals inside. Click will go to add journals page 
           for (let i=0;i<documentID.length;i++) {
               console.log(documentID.length + " is documentID count");
               let currentButton = new createGoalButtonForJournal(documentID[i], goalName[i]);

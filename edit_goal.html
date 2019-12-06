@@ -25,19 +25,15 @@
             <h2 id="description">Click on a goal to edit its details</h2>
     </div>
     <script>
+        //global variables
         let index = 1;
         let existingGoals = [];
-        function createProgressBar(elem, percentage){
-            let progressBar1 = document.createElement("div");
-            progressBar1.id = "myProgress";
-            let progressBar2 = document.createElement("div");
-            progressBar2.id="myBar";
-            progressBar2.style.width=percentage + "%";
-            progressBar1.appendChild(progressBar2);
-            elem.appendChild(progressBar1);
 
-        }
+        //create jumbotron elements for each goal
+        //hyperlinked with internal div element        
         function createDiv(doc, index){
+            //:param doc: the parameter name to be used in querySnapshot
+            //:param index: the doc number from Firebase
             let div = document.createElement("jumbotron");
             div.id= "Goal" + index;
             let anchor = document.createElement("a");

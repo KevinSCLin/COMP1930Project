@@ -23,7 +23,7 @@
     <div id="JournalPlacement"></div>
 
 <script>
-
+        //global variables for array pushes and Firebase path
       let documentID = [];
       let goalName = [];
       let journalDoc = db.collection("Users").doc(user).collection("Goals");
@@ -63,7 +63,8 @@
               document.getElementById("JournalPlacement").appendChild(journalItems);
           }
       }
-      // Generate buttons with goals inside. Click will go to add journals page 
+
+      // Generate buttons with goals inside. Clicking will go to add journals page .
       function generateAllButtons() {
           for (let i=0;i<documentID.length;i++) {
               console.log(documentID.length + " is documentID count");
@@ -71,22 +72,6 @@
               currentButton.buildButton();
         }
       }
-
-
-      // // Retrieve past journals and generate blocks of them using js
-      // let journalArr = [];
-      // // Loop through all goal documents to find all journals
-      // for (i=0;i<documentID.length;i++) {
-      // let savedJournal = db.collection("Users").doc(user).collection("Goals").doc("Goalnull").collection("Journals").doc("entry1");
-      //     savedJournal.get().then(function(querySnapshot) {
-      //       querySnapshot.forEach(function(doc) {
-      //         journalArr.push(doc.data().journalText);
-      //         console.log(doc.data().journalText);
-      //       })
-      //     })
-      // }
-
-
 </script>
 
     

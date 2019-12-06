@@ -29,6 +29,7 @@
 
 
 <script>
+    //global variables for query strings, Firebase paths and arrays
     let queryString = decodeURIComponent(window.location.search);
     let URLsplitArr = queryString.split("?");
     let goalDoc = URLsplitArr[1];
@@ -37,20 +38,22 @@
     let goalDocPath = db.collection("Users").doc(user).collection("Goals").doc(goalDoc).collection("Journals");
     let journalArr = [];
     let dateArr = [];
-    sortByTime("desc");
 
+    sortByTime("desc");  //initially sort all journals from latest to oldest
+
+    // Sort from newest to oldest
     document.getElementById("orderByNewest").onclick = function() {
         sortByTime("desc");
     }
-
+    // Sort from oldest to newest
     document.getElementById("orderByOldest").onclick = function() {
         sortByTime("asc");
     }
 
     //sort journal from newest to oldest
     function sortByTime(sortBy) {
-        //remove exsting journals
-        removeJournal();
+        //:param sortBy: either "desc" or "asc"
+        removeJournal(); //remove exsting journals
         goalDocPath.orderBy("date", sortBy)
             .get()
             .then(function(querySnapshot) {
@@ -80,7 +83,7 @@
         };
     };
     
-    // Remove all journals using jQuery
+    // Remove all journals using jQuery for re-sort
     function removeJournal() {
         $(".journalText").remove();
     }
